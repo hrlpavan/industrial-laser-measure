@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+output_*.png
+check_overlay.png
+push_payload.json
