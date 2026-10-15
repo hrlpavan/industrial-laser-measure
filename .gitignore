@@ -9,4 +9,5 @@ dist/
 build/
 output_*.png
 check_overlay.png
-push_payload.json
+demo_inspection_result.png
+push_demo_payload.json
