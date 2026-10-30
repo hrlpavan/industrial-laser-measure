@@ -77,25 +77,37 @@ def run_web_demo(port: int = 8080):
                     if img is None:
                         raise ValueError("Failed to decode uploaded image. Supported formats: JPG, PNG, WEBP, BMP, TIFF.")
 
-                    # Calibration resolution
-                    scale_mm = payload.get("scale_mm_per_px")
-                    if scale_mm and float(scale_mm) > 0:
-                        s = float(scale_mm)
-                        H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
-                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.002)
-                    elif calib_file.exists():
-                        calib = CameraCalibration.load(str(calib_file))
-                    else:
-                        # Fallback default 0.25 mm/px
-                        H = np.array([[0.25, 0.0, 0.0], [0.0, 0.25, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
-                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.005)
-
                     pt_a = payload.get("pt_a")
                     pt_b = payload.get("pt_b")
                     laser_color = payload.get("color", "red")
                     mode = payload.get("mode", "spots")
                     refine = payload.get("refine_peaks", True)
                     source = payload.get("source", "auto")
+
+                    # Calibration resolution (supporting 1-click reference calibration)
+                    calibrate_to_cm = payload.get("calibrate_to_cm")
+                    scale_cm = payload.get("scale_cm_per_px")
+                    scale_mm = payload.get("scale_mm_per_px")
+
+                    if calibrate_to_cm and pt_a and pt_b:
+                        px_dist = math.hypot(float(pt_b[0]) - float(pt_a[0]), float(pt_b[1]) - float(pt_a[1]))
+                        s = (float(calibrate_to_cm) * 10.0) / max(1e-6, px_dist)
+                        H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.001)
+                    elif scale_cm and float(scale_cm) > 0:
+                        s = float(scale_cm) * 10.0
+                        H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.002)
+                    elif scale_mm and float(scale_mm) > 0:
+                        s = float(scale_mm)
+                        H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.002)
+                    elif calib_file.exists():
+                        calib = CameraCalibration.load(str(calib_file))
+                    else:
+                        # Fallback default
+                        H = np.array([[0.25, 0.0, 0.0], [0.0, 0.25, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+                        calib = CameraCalibration(homography=H, mean_reprojection_error_mm=0.005)
 
                     if pt_a and pt_b:
                         pt_a_hint = (float(pt_a[0]), float(pt_a[1]))

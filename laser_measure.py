@@ -502,6 +502,8 @@ def main() -> None:
     meas_p.add_argument("--image", "-i", required=True, help="Path to input image")
     meas_p.add_argument("--calib", "-c", default="calibration.json", help="Path to calibration.json (defaults to calibration.json)")
     meas_p.add_argument("--scale-mm-per-px", type=float, help="Optional direct scale factor (mm/px) if no calibration matrix is provided")
+    meas_p.add_argument("--scale-cm-per-px", type=float, help="Optional direct scale factor (cm/px) if no calibration matrix is provided")
+    meas_p.add_argument("--calibrate-to-cm", type=float, help="Calibrate camera scale so that measured distance equals this reference value in cm, saving to calibration.json")
     meas_p.add_argument("--pt-a", help="Optional Point A hint 'x,y' for pinpoint measurement")
     meas_p.add_argument("--pt-b", help="Optional Point B hint 'x,y' for pinpoint measurement")
     meas_p.add_argument("--mode", choices=["spots", "line"], default="spots", help="Measurement target mode")
@@ -544,20 +546,34 @@ def main() -> None:
         if img is None:
             sys.exit(f"Error: Could not read image at {args.image}")
 
-        if args.scale_mm_per_px:
+        if args.calibrate_to_cm:
+            # Scale will be calculated dynamically from hints or points
+            calib = None
+        elif args.scale_cm_per_px:
+            s = float(args.scale_cm_per_px) * 10.0
+            H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+            calib = CameraCalibration(homography=H)
+        elif args.scale_mm_per_px:
             s = float(args.scale_mm_per_px)
             H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
             calib = CameraCalibration(homography=H)
         elif Path(args.calib).exists():
             calib = CameraCalibration.load(args.calib)
         else:
-            sys.exit(f"Error: Calibration file '{args.calib}' not found and no --scale-mm-per-px provided.")
+            sys.exit(f"Error: Calibration file '{args.calib}' not found and no --scale-mm-per-px, --scale-cm-per-px, or --calibrate-to-cm provided.")
 
         pt_a_hint = None
         pt_b_hint = None
         if args.pt_a and args.pt_b:
             pt_a_hint = tuple(float(v) for v in args.pt_a.split(","))
             pt_b_hint = tuple(float(v) for v in args.pt_b.split(","))
+            if args.calibrate_to_cm:
+                px_d = math.hypot(pt_b_hint[0] - pt_a_hint[0], pt_b_hint[1] - pt_a_hint[1])
+                s = (float(args.calibrate_to_cm) * 10.0) / max(1e-6, px_d)
+                H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+                calib = CameraCalibration(homography=H)
+                calib.save(args.calib)
+                print(f"[CALIBRATED] Set scale {s:.6f} mm/px ({s/10:.6f} cm/px) for reference {args.calibrate_to_cm} cm -> saved {args.calib}")
             res = measure_points_with_refinement(
                 img, calib, pt_a_hint=pt_a_hint, pt_b_hint=pt_b_hint, laser_color=args.color, source=args.source
             )
