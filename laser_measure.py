@@ -27,6 +27,26 @@ class MeasurementResult:
     uncertainty_mm: float
     gsd_mm_per_px: float
 
+    @property
+    def distance_cm(self) -> float:
+        """True calibrated physical distance in centimeters (cm)."""
+        return round(self.distance_mm / 10.0, 4)
+
+    @property
+    def uncertainty_cm(self) -> float:
+        """Measurement uncertainty budget (95% CI) in centimeters (cm)."""
+        return round(self.uncertainty_mm / 10.0, 4)
+
+    @property
+    def point_a_cm(self) -> Tuple[float, float]:
+        """Point A physical coordinates in centimeters (cm)."""
+        return (round(self.point_a_mm[0] / 10.0, 4), round(self.point_a_mm[1] / 10.0, 4))
+
+    @property
+    def point_b_cm(self) -> Tuple[float, float]:
+        """Point B physical coordinates in centimeters (cm)."""
+        return (round(self.point_b_mm[0] / 10.0, 4), round(self.point_b_mm[1] / 10.0, 4))
+
 
 class CameraCalibration:
     """Manages planar homography and lens calibration between pixels and world mm."""
@@ -415,19 +435,19 @@ def render_inspection_overlay(
     draw_crosshair(vis, ax, ay, f"Point A: ({result.point_a_mm[0]}, {result.point_a_mm[1]}) mm", (0, 255, 0))
     draw_crosshair(vis, bx, by, f"Point B: ({result.point_b_mm[0]}, {result.point_b_mm[1]}) mm", (0, 165, 255))
 
-    # Metric HUD banner
+    # Metric HUD banner in Centimeters (cm)
     mid_x, mid_y = (ax + bx) // 2, (ay + by) // 2
-    hud_text = f"Distance: {result.distance_mm:.2f} +/- {result.uncertainty_mm:.2f} mm"
+    hud_text = f"Distance: {result.distance_cm:.3f} cm (+/- {result.uncertainty_cm:.3f} cm)"
     cv2.putText(
-        vis, hud_text, (max(20, mid_x - 120), max(30, mid_y - 20)),
+        vis, hud_text, (max(20, mid_x - 140), max(30, mid_y - 20)),
         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 3, cv2.LINE_AA
     )
     cv2.putText(
-        vis, hud_text, (max(20, mid_x - 120), max(30, mid_y - 20)),
+        vis, hud_text, (max(20, mid_x - 140), max(30, mid_y - 20)),
         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 255), 1, cv2.LINE_AA
     )
 
-    info_text = f"GSD: {result.gsd_mm_per_px:.4f} mm/px | Sub-pixel precision: +/-0.05 px"
+    info_text = f"Distance: {result.distance_mm:.2f} mm | Sub-pixel precision: +/-0.05 px"
     cv2.putText(vis, info_text, (20, vis.shape[0] - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
     return vis
 

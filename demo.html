@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,51 +7,54 @@
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     /* ========================================================= */
-    /* HRL INTERNATIONAL BRAND DESIGN TOKENS                     */
+    /* HRL INTERNATIONAL BRAND DESIGN TOKENS (LIGHT STUDIO)      */
     /* Apple Design System & Industrial Metrology Specifications */
     /* ========================================================= */
     :root {
       --brand-crimson: #d1002d;
       --brand-crimson-hover: #b00026;
-      --brand-crimson-glow: rgba(209, 0, 45, 0.35);
-      --brand-blue: #0071e3;
-      --brand-blue-accent: #2997ff;
-      --brand-dark: #121214;
-      --brand-dark-elevated: #1a1a1e;
-      --brand-border-dark: rgba(255, 255, 255, 0.10);
+      --brand-crimson-glow: rgba(209, 0, 45, 0.18);
+      --apple-bg: #f5f5f7;
+      --apple-card-bg: #ffffff;
+      --apple-border: rgba(0, 0, 0, 0.08);
+      --apple-border-strong: rgba(0, 0, 0, 0.14);
+      --apple-text-primary: #1d1d1f;
+      --apple-text-secondary: #515154;
+      --apple-text-muted: #86868b;
       --apple-font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
       --apple-mono: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      --apple-blur: blur(24px) saturate(190%);
     }
 
     body {
       font-family: var(--apple-font);
-      background-color: #09090b;
-      color: #f4f4f5;
+      background-color: var(--apple-bg);
+      color: var(--apple-text-primary);
+      -webkit-font-smoothing: antialiased;
     }
 
     .font-mono {
       font-family: var(--apple-mono);
     }
 
-    /* Apple Ribbon Banner */
+    /* Apple Ribbon Banner (Light Mode) */
     .apple-ribbon {
-      background: rgba(24, 24, 27, 0.85);
-      backdrop-filter: var(--apple-blur);
-      border-bottom: 1px solid var(--brand-border-dark);
+      background: rgba(255, 255, 255, 0.90);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid var(--apple-border);
       text-align: center;
-      padding: 8px 16px;
+      padding: 7px 16px;
       font-size: 11.5px;
       letter-spacing: -0.01em;
-      color: #a1a1aa;
+      color: var(--apple-text-secondary);
     }
     .apple-ribbon strong {
-      color: #ffffff;
+      color: var(--apple-text-primary);
+      font-weight: 600;
     }
     .apple-ribbon a {
       color: var(--brand-crimson);
       text-decoration: none;
-      font-weight: 700;
+      font-weight: 600;
       margin-left: 6px;
       display: inline-flex;
       align-items: center;
@@ -63,23 +66,23 @@
       text-decoration: underline;
     }
 
-    /* HRL Tactile Brand Cards */
+    /* HRL Tactile Brand Cards (Light Studio) */
     .brand-tactile-card {
-      background: linear-gradient(170deg, #18181b 0%, #111113 100%);
-      border: 1px solid var(--brand-border-dark);
+      background: var(--apple-card-bg);
+      border: 1px solid var(--apple-border);
       border-left: 5px solid var(--brand-crimson);
       border-radius: 20px;
       padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 1px 3px rgba(255, 255, 255, 0.05);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
       position: relative;
       overflow: hidden;
     }
 
     .hrl-watermark {
       position: absolute;
-      right: -8px;
-      bottom: -16px;
-      font-size: 96px;
+      right: -6px;
+      bottom: -18px;
+      font-size: 92px;
       font-weight: 900;
       color: rgba(209, 0, 45, 0.035);
       user-select: none;
@@ -88,13 +91,13 @@
       font-family: var(--apple-font);
     }
 
-    /* HRL Pill Badges */
+    /* HRL Pill Badges (Light Mode) */
     .brand-pill-badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(209, 0, 45, 0.10);
-      border: 1px solid rgba(209, 0, 45, 0.25);
+      background: rgba(209, 0, 45, 0.07);
+      border: 1px solid rgba(209, 0, 45, 0.20);
       padding: 4px 12px;
       border-radius: 9999px;
     }
@@ -103,7 +106,7 @@
       height: 6px;
       border-radius: 50%;
       background: var(--brand-crimson);
-      box-shadow: 0 0 8px var(--brand-crimson);
+      box-shadow: 0 0 6px var(--brand-crimson);
     }
     .brand-pill-text {
       font-size: 10.5px;
@@ -118,29 +121,30 @@
       background: var(--brand-crimson);
       color: #ffffff;
       font-size: 12.5px;
-      font-weight: 700;
+      font-weight: 600;
       padding: 8px 18px;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
       box-shadow: 0 4px 14px var(--brand-crimson-glow);
-      transition: transform 0.2s ease, background-color 0.2s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
       border: none;
     }
     .brand-btn-primary:hover {
       background: var(--brand-crimson-hover);
       transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(209, 0, 45, 0.25);
     }
     .brand-btn-primary:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
 
     .brand-btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--brand-border-dark);
-      color: #e4e4e7;
+      background: #ffffff;
+      border: 1px solid #d2d2d7;
+      color: var(--apple-text-primary);
       font-size: 12px;
       font-weight: 600;
       padding: 7px 15px;
@@ -152,46 +156,22 @@
       cursor: pointer;
     }
     .brand-btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.10);
-      border-color: rgba(255, 255, 255, 0.20);
-      color: #ffffff;
+      background: #fbfbfd;
+      border-color: #b0b0b5;
+    }
+    .brand-btn-secondary:active {
+      transform: scale(0.98);
     }
 
-    .brand-tab-btn {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 8px 18px;
-      border-radius: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: 1px solid transparent;
-    }
-    .brand-tab-btn.active {
-      background: #27272a;
-      color: #ffffff;
-      border-color: rgba(209, 0, 45, 0.4);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    }
-    .brand-tab-btn:not(.active) {
-      background: transparent;
-      color: #71717a;
-    }
-    .brand-tab-btn:not(.active):hover {
-      color: #d4d4d8;
-      background: rgba(255, 255, 255, 0.03);
-    }
-
-    /* Dropzone Hover */
+    /* Minimalist Dropzone */
     .dropzone {
-      border: 2px dashed rgba(255, 255, 255, 0.15);
+      border: 2px dashed #d2d2d7;
+      background: #fafafc;
       transition: all 0.2s ease;
     }
     .dropzone.dragover {
       border-color: var(--brand-crimson);
-      background: rgba(209, 0, 45, 0.08);
+      background: rgba(209, 0, 45, 0.04);
     }
 
     canvas {
@@ -204,580 +184,239 @@
   <!-- TOP APPLE-STYLE ANNOUNCEMENT RIBBON -->
   <div class="apple-ribbon">
     <span>
-      <strong>HRL Research & Metrology Lab:</strong> Sovereign Sub-Millimeter Optical Metrology Engine (A &rarr; B)
+      <strong>HRL Research & Metrology:</strong> Sub-Pixel Laser Distance Engine (Point A &rarr; Point B)
       <a href="https://github.com/hrlpavan/industrial-laser-measure" target="_blank" rel="noreferrer">
-        <span>ISO 10360 Calibrated Release</span>
+        <span>ISO 10360 Calibrated Standard</span>
         <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
       </a>
     </span>
   </div>
 
-  <div class="max-w-7xl w-full mx-auto p-4 md:p-6 lg:p-8 flex-1 space-y-6">
+  <div class="max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 flex-1 space-y-6">
 
-    <!-- MASTER BRAND HEADER -->
-    <header class="flex flex-col md:flex-row md:items-center justify-between pb-5 border-b border-zinc-800/80 gap-4">
+    <!-- MASTER BRAND HEADER (FEATURING OFFICIAL HRL LOGO) -->
+    <header class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-zinc-200 gap-4">
       <div class="flex items-center gap-3.5">
-        <!-- HRL Monogram Logo Mark -->
-        <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-red-600 to-[#d1002d] flex items-center justify-center shadow-lg shadow-red-950/60 border border-red-400/30">
-          <span class="text-white font-black tracking-tighter text-sm select-none font-mono">HRL</span>
+        <!-- HRL Official Logo -->
+        <div class="h-12 w-12 rounded-2xl bg-white border border-zinc-200/80 p-1 flex items-center justify-center shadow-sm">
+          <img src="hrl-official-logo.png" alt="HRL International Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='assets/hrl-official-logo.png';">
         </div>
         <div>
           <div class="flex items-center gap-2">
             <span class="text-[11px] font-black tracking-widest text-[#d1002d] uppercase font-mono">HRL International Pvt. Ltd.</span>
-            <span class="w-1 h-1 rounded-full bg-zinc-600"></span>
-            <span class="text-[11px] font-semibold text-zinc-400 font-mono">Industrial Optical Metrology</span>
+            <span class="w-1 h-1 rounded-full bg-zinc-300"></span>
+            <span class="text-[11px] font-medium text-zinc-500 font-mono">Advanced Metrology Division</span>
           </div>
-          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-white mt-0.5">Laser Distance Metrology Station (A &rarr; B)</h1>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-zinc-900 mt-0.5">Laser Line Metrology Station</h1>
         </div>
       </div>
 
-      <!-- Mode Switcher Tabs -->
-      <div class="bg-zinc-900/90 p-1.5 rounded-2xl border border-zinc-800 flex items-center gap-1">
-        <button id="tabBtnUpload" onclick="switchMainTab('upload')" class="brand-tab-btn active">
-          <svg class="w-4 h-4 text-[#d1002d]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>Upload Test Photo</span>
+      <!-- Quick Minimalist Controls -->
+      <div class="flex items-center gap-2">
+        <button onclick="loadSampleTestImage()" class="brand-btn-secondary">
+          <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+          <span>Load Calibrated Sample</span>
         </button>
-        <button id="tabBtnSim" onclick="switchMainTab('sim')" class="brand-tab-btn">
-          <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-          <span>Synthetic Optical Rig</span>
-        </button>
+        <label class="brand-btn-primary cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+          <span>Upload Laser Photo</span>
+          <input type="file" id="fileInput" accept="image/*,.jpg,.jpeg,.png,.webp,.bmp,.tiff" class="hidden" onchange="handleFileSelect(event)">
+        </label>
       </div>
     </header>
 
-    <!-- ============================================================== -->
-    <!-- TAB 1: UPLOAD REAL TEST PHOTO SECTION (CLIENT WORKFLOW)       -->
-    <!-- ============================================================== -->
-    <div id="sectionUpload" class="space-y-6">
+    <!-- MINIMALIST WORKSPACE (2 COLUMNS: INSPECTION CANVAS & METROLOGY RESULT) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT 8 COLS: HIGH-PRECISION INSPECTION CANVAS -->
+      <div class="lg:col-span-8 space-y-4">
+        
+        <!-- Inspection Surface Card -->
+        <div class="brand-tactile-card p-4 space-y-3">
+          <div class="hrl-watermark">HRL</div>
 
-      <!-- Upload Banner & Dropzone -->
-      <div class="brand-tactile-card p-5 md:p-6 space-y-4">
-        <div class="hrl-watermark">HRL</div>
-
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-zinc-800/80 pb-4">
-          <div>
+          <!-- Top Minimalist Bar Inside Card -->
+          <div class="flex flex-wrap items-center justify-between pb-1 gap-2">
             <div class="flex items-center gap-2">
               <span class="brand-pill-badge">
                 <span class="brand-pill-dot"></span>
-                <span class="brand-pill-text">Live Image Ingest</span>
+                <span id="engineBadge" class="brand-pill-text">Inspection Ready</span>
               </span>
-              <span class="text-xs text-zinc-400 font-mono">Supported: JPG, PNG, WEBP, BMP, TIFF</span>
+              <span id="resolutionBadge" class="text-xs text-zinc-500 font-mono bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200">
+                1280 &times; 960 px
+              </span>
             </div>
-            <h2 class="text-lg font-bold text-white mt-1">Upload Real Industrial Laser Photo</h2>
-            <p class="text-xs text-zinc-400">Upload your client test photo. Click Point A and Point B, or let the sub-pixel engine auto-localize laser spots down to &plusmn;0.05 pixel.</p>
+
+            <!-- Auto-Detect Pill Button -->
+            <button onclick="autoDetectSpots()" class="text-xs font-mono font-semibold text-[#d1002d] hover:text-[#b00026] flex items-center gap-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>Auto-Detect Laser Spots</span>
+            </button>
           </div>
 
-          <!-- Quick Actions -->
-          <div class="flex items-center gap-2">
-            <button onclick="loadSampleTestImage()" class="brand-btn-secondary">
-              <svg class="w-3.5 h-3.5 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-              <span>Load Sample Frame</span>
+          <!-- Canvas Container -->
+          <div class="relative rounded-xl overflow-hidden bg-zinc-950 border border-zinc-200/80 shadow-inner">
+            <canvas id="inspectionCanvas" width="800" height="520" class="w-full h-auto block"></canvas>
+            
+            <!-- User Instruction Prompt (Floating Pill) -->
+            <div id="instructionPill" class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-zinc-200/80 text-xs font-medium text-zinc-700 shadow-sm flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span id="instructionText">Click Point A and Point B on your laser to measure</span>
+            </div>
+          </div>
+
+          <!-- Minimalist Status & Point Clear Footer -->
+          <div class="flex items-center justify-between pt-1 text-xs text-zinc-500">
+            <div class="flex items-center gap-4">
+              <span class="flex items-center gap-1.5 font-medium text-emerald-600">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Point A: <span id="labelPtAPx" class="font-mono text-zinc-800 font-semibold">Active</span>
+              </span>
+              <span class="flex items-center gap-1.5 font-medium text-amber-600">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span> Point B: <span id="labelPtBPx" class="font-mono text-zinc-800 font-semibold">Active</span>
+              </span>
+            </div>
+            <button onclick="clearPoints()" class="text-zinc-400 hover:text-zinc-700 font-mono text-[11px] underline">Reset Points</button>
+          </div>
+        </div>
+
+        <!-- Optional Minimalist Dropzone (For Drag & Drop) -->
+        <div id="dropZone" class="dropzone rounded-2xl p-5 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+          <div class="flex items-center justify-center gap-3 text-xs text-zinc-600">
+            <svg class="w-4 h-4 text-[#d1002d]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+            <span>Drag &amp; drop test photo here (JPG, PNG, TIFF, BMP, WEBP)</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT 4 COLS: MINIMALIST RESULT CARD & ESSENTIAL CONTROLS -->
+      <div class="lg:col-span-4 space-y-4">
+        
+        <!-- Primary Result Card (Centimeter Reading) -->
+        <div class="bg-white rounded-2xl border border-zinc-200 p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-zinc-100 pb-3">
+            <span class="text-xs font-mono uppercase tracking-wider text-zinc-500 font-bold">Measurement Result</span>
+            <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10.5px] px-2.5 py-0.5 rounded-full font-mono font-bold">100% Calibrated</span>
+          </div>
+
+          <!-- Big Centimeter Readout -->
+          <div class="space-y-1">
+            <div class="text-xs uppercase font-mono text-zinc-500 font-medium">True Distance (A &rarr; B)</div>
+            <div class="flex items-baseline gap-2">
+              <span id="metricDistCm" class="text-5xl font-black tracking-tight text-zinc-900 font-mono">12.000</span>
+              <span class="text-2xl font-bold text-[#d1002d] font-mono">cm</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono text-zinc-500 pt-1">
+              <span>95% Confidence:</span>
+              <span id="metricUncertCm" class="text-emerald-600 font-bold">&plusmn; 0.001 cm (12 &mu;m)</span>
+            </div>
+          </div>
+
+          <!-- Minimalist Coordinates (In Centimeters) -->
+          <div class="bg-zinc-50 rounded-xl p-3 border border-zinc-100 space-y-2 text-xs font-mono">
+            <div class="flex justify-between items-center pb-1.5 border-b border-zinc-200/60">
+              <span class="text-emerald-700 font-semibold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Point A:
+              </span>
+              <span id="coordPtACm" class="text-zinc-800 font-bold">X: 4.000 cm, Y: 10.000 cm</span>
+            </div>
+            <div class="flex justify-between items-center pt-0.5">
+              <span class="text-amber-700 font-semibold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-amber-500"></span> Point B:
+              </span>
+              <span id="coordPtBCm" class="text-zinc-800 font-bold">X: 16.000 cm, Y: 10.000 cm</span>
+            </div>
+          </div>
+
+          <!-- Millimeter Reference (Subtle Minimalist Note) -->
+          <div class="text-[11px] font-mono text-zinc-400 text-center">
+            Metric Millimeters: <span id="metricDistMm" class="text-zinc-600 font-semibold">120.000 mm</span>
+          </div>
+
+          <!-- Export Actions -->
+          <div class="grid grid-cols-2 gap-2 pt-1">
+            <button onclick="exportInspectionPNG()" class="brand-btn-primary justify-center text-xs w-full py-2.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>Export Photo</span>
             </button>
-            <label class="brand-btn-primary cursor-pointer">
-              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-              <span>Browse Image File</span>
-              <input type="file" id="fileInput" accept="image/*,.jpg,.jpeg,.png,.webp,.bmp,.tiff" class="hidden" onchange="handleFileSelect(event)">
+            <button onclick="copyMeasurementJSON()" class="brand-btn-secondary justify-center text-xs w-full py-2.5">
+              <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              <span id="btnCopyText">Copy Data</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Minimalist Optical Settings (Clean & Uncluttered) -->
+        <div class="bg-white rounded-2xl border border-zinc-200 p-4 space-y-3">
+          <div class="text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">Optical Filter</div>
+          
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="setLaserColor('red')" id="btnRed" class="py-1.5 text-xs font-mono font-bold rounded-lg bg-red-50 border border-red-300 text-red-700">Red 650nm</button>
+            <button onclick="setLaserColor('green')" id="btnGreen" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Green 532nm</button>
+            <button onclick="setLaserColor('blue')" id="btnBlue" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Blue 405nm</button>
+          </div>
+
+          <div class="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs">
+            <span class="text-zinc-600 font-medium">Sub-Pixel Centroid Snap</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="snapToggle" class="sr-only peer" checked onchange="recalculateMeasurement()">
+              <div class="w-8 h-4 bg-zinc-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-[#d1002d]"></div>
             </label>
           </div>
         </div>
 
-        <!-- Drag & Drop Zone (Visible when no image or to replace) -->
-        <div id="dropZone" class="dropzone rounded-2xl p-6 text-center cursor-pointer bg-zinc-950/60 hover:bg-zinc-950 transition" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-          <div class="flex flex-col items-center justify-center space-y-2">
-            <div class="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-700/80 flex items-center justify-center text-zinc-400">
-              <svg class="w-6 h-6 text-[#d1002d]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-            </div>
-            <div class="text-sm font-semibold text-white">Drag & drop your laser inspection photo here</div>
-            <div class="text-xs text-zinc-500 font-mono">High-accuracy sub-pixel centroid analysis &bull; Perspective rectification &bull; Instant metric readout</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Inspection Grid -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- Left 8 Cols: Uploaded Photo Inspection Canvas -->
-        <div class="lg:col-span-8 space-y-4">
-          <div class="brand-tactile-card p-4">
-            <div class="hrl-watermark">HRL</div>
-
-            <!-- Canvas Top Toolbar -->
-            <div class="flex flex-wrap items-center justify-between pb-3 px-1 gap-2">
-              <div class="flex items-center gap-2">
-                <span class="brand-pill-badge">
-                  <span class="brand-pill-dot"></span>
-                  <span id="uploadEngineBadge" class="brand-pill-text">Engine Ready</span>
-                </span>
-                <span id="imgInfoBadge" class="bg-zinc-900/90 text-xs px-2.5 py-1 rounded-full border border-zinc-700/60 font-mono text-zinc-300">
-                  Resolution: <span class="text-white font-semibold">1280 &times; 960 px</span>
-                </span>
-              </div>
-
-              <!-- Measurement Mode Pill Selector -->
-              <div class="flex items-center gap-1.5 bg-zinc-950 p-1 rounded-xl border border-zinc-800 text-xs font-mono">
-                <button id="btnModePinpoint" onclick="setInspectionMode('pinpoint')" class="px-2.5 py-1 rounded-lg bg-zinc-800 text-white font-bold border border-zinc-700">Pinpoint Click & Snap</button>
-                <button id="btnModeSpots" onclick="setInspectionMode('spots')" class="px-2.5 py-1 rounded-lg text-zinc-400 hover:text-white">Auto-Spots</button>
-                <button id="btnModeLine" onclick="setInspectionMode('line')" class="px-2.5 py-1 rounded-lg text-zinc-400 hover:text-white">Auto-Line</button>
-              </div>
-            </div>
-
-            <!-- Canvas Container -->
-            <div class="relative rounded-xl overflow-hidden bg-zinc-950 border border-zinc-800/80">
-              <canvas id="uploadCanvas" width="800" height="520" class="w-full h-auto block"></canvas>
-              <div id="canvasOverlayPrompt" class="absolute bottom-3 left-3 bg-zinc-900/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-zinc-700/70 text-xs font-mono text-zinc-300 flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span id="promptText">Click anywhere to place Point A, then Point B</span>
-              </div>
-            </div>
-
-            <!-- Sub-Canvas Controls -->
-            <div class="flex flex-wrap items-center justify-between pt-3 px-2 text-xs text-zinc-400 gap-2">
-              <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5 font-medium text-emerald-400">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-xs shadow-emerald-500/50"></span> Point A: <span id="labelPtAPx" class="font-mono text-white">Pending</span>
-                </span>
-                <span class="flex items-center gap-1.5 font-medium text-amber-400">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block shadow-xs shadow-amber-500/50"></span> Point B: <span id="labelPtBPx" class="font-mono text-white">Pending</span>
-                </span>
-              </div>
-              <div class="flex items-center gap-2">
-                <button onclick="clearPoints()" class="text-zinc-500 hover:text-zinc-300 font-mono text-[11px] underline">Clear Points</button>
-                <span class="text-zinc-600">&bull;</span>
-                <button onclick="runAutoMeasurement()" class="text-[#d1002d] hover:underline font-mono text-[11px] font-bold">Auto-Detect Laser</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Sub-Pixel Centroid Profile Cross-Section -->
-          <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 space-y-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#d1002d]"></span>
-                <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">Point A &amp; B Sub-Pixel Peak Intensity Cross-Section</span>
-              </div>
-              <span class="text-xs font-mono text-zinc-400">Peak Centroid Algorithm: <span class="text-emerald-400 font-bold">Gaussian CoG &plusmn; 0.05 px</span></span>
-            </div>
-            <canvas id="uploadProfileCanvas" width="760" height="90" class="w-full h-24 rounded-lg bg-zinc-950 border border-zinc-800/60"></canvas>
-          </div>
-        </div>
-
-        <!-- Right 4 Cols: Calibrated Metrology Results & Scale Config -->
-        <div class="lg:col-span-4 space-y-4">
-          
-          <!-- Metrology Result Card -->
-          <div class="bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-5 shadow-xl space-y-4">
-            <div class="flex items-center justify-between border-b border-zinc-800/80 pb-3">
-              <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">Calibrated Metric Output</span>
-              <span class="bg-[#d1002d]/10 text-[#d1002d] border border-[#d1002d]/30 text-[10.5px] px-2.5 py-0.5 rounded-full font-mono font-bold">100% Calibrated</span>
-            </div>
-
-            <!-- Big Readout -->
-            <div class="space-y-1">
-              <div class="text-xs uppercase font-mono text-zinc-400">True Calibrated Distance (A &rarr; B)</div>
-              <div class="flex items-baseline gap-2">
-                <span id="uploadMetricDist" class="text-4xl md:text-5xl font-black tracking-tight text-white font-mono">120.000</span>
-                <span class="text-2xl font-black text-[#d1002d] font-mono">mm</span>
-              </div>
-              <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 pt-1">
-                <span>ISO Uncertainty (95% CI):</span>
-                <span id="uploadMetricUncert" class="text-emerald-400 font-semibold">&plusmn; 0.012 mm (12 &mu;m)</span>
-              </div>
-            </div>
-
-            <!-- Coordinates Breakdown -->
-            <div class="bg-zinc-950/80 rounded-xl p-3 border border-zinc-800/80 space-y-2.5 text-xs font-mono">
-              <div class="flex justify-between items-center pb-2 border-b border-zinc-800/60">
-                <span class="text-emerald-400 font-semibold flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Point A:
-                </span>
-                <span id="uploadPtAMm" class="text-zinc-100 font-bold">X: 40.000 mm, Y: 100.000 mm</span>
-              </div>
-              <div class="flex justify-between items-center text-zinc-400 text-[11px]">
-                <span class="text-zinc-500">Image Sensor Sub-Pixel:</span>
-                <span id="uploadPtAPxVal">u: 295.67, v: 486.96</span>
-              </div>
-
-              <div class="flex justify-between items-center pt-1 pb-2 border-b border-zinc-800/60">
-                <span class="text-amber-400 font-semibold flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-amber-400"></span> Point B:
-                </span>
-                <span id="uploadPtBMm" class="text-zinc-100 font-bold">X: 160.000 mm, Y: 100.000 mm</span>
-              </div>
-              <div class="flex justify-between items-center text-zinc-400 text-[11px]">
-                <span class="text-zinc-500">Image Sensor Sub-Pixel:</span>
-                <span id="uploadPtBPxVal">u: 984.33, v: 486.96</span>
-              </div>
-            </div>
-
-            <!-- Export Buttons -->
-            <div class="grid grid-cols-2 gap-2 pt-2">
-              <button onclick="exportInspectionPNG()" class="brand-btn-primary justify-center text-xs w-full">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                <span>Export PNG</span>
-              </button>
-              <button onclick="copyInspectionJSON()" class="brand-btn-secondary justify-center text-xs w-full">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
-                <span id="copyJsonBtnText">Copy JSON</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Calibration & Optics Settings -->
-          <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 space-y-4">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase font-bold tracking-wider text-zinc-300">
-              <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
-              <span>Metrology Calibration Settings</span>
-            </div>
-
-            <!-- Calibration Method Selection -->
-            <div class="space-y-2">
-              <label class="text-xs text-zinc-400 block font-medium">Coordinate System Calibration</label>
-              <div class="space-y-1.5 text-xs font-mono">
-                <label class="flex items-center gap-2 text-zinc-200 cursor-pointer">
-                  <input type="radio" name="calibMode" value="homography" checked onchange="handleCalibModeChange()" class="accent-red-600">
-                  <span>Planar Homography (calibration.json)</span>
-                </label>
-                <label class="flex items-center gap-2 text-zinc-200 cursor-pointer">
-                  <input type="radio" name="calibMode" value="scale" onchange="handleCalibModeChange()" class="accent-red-600">
-                  <span>Direct Metric Scale Factor (mm/pixel)</span>
-                </label>
-              </div>
-            </div>
-
-            <!-- Custom Scale Factor Input (Visible when scale mode selected) -->
-            <div id="scaleFactorContainer" class="hidden space-y-1.5 p-3 rounded-xl bg-zinc-950 border border-zinc-800">
-              <div class="flex justify-between text-xs">
-                <span class="text-zinc-400">Scale Factor (mm/pixel)</span>
-                <span class="font-mono text-zinc-500">e.g. 0.250</span>
-              </div>
-              <input type="number" id="inputScaleFactor" step="0.001" value="0.250" class="w-full bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-1.5 text-white font-mono text-xs focus:outline-none focus:border-red-500" onchange="recalculateMeasurement()">
-            </div>
-
-            <!-- Laser Optical Color -->
-            <div class="space-y-1.5">
-              <label class="text-xs text-zinc-400 block font-medium">Laser Optical Band</label>
-              <div class="grid grid-cols-3 gap-2">
-                <button onclick="setUploadLaserColor('red')" id="btnUploadRed" class="py-1.5 text-xs font-mono font-bold rounded-lg bg-red-950 border border-red-600 text-red-200">Red 650nm</button>
-                <button onclick="setUploadLaserColor('green')" id="btnUploadGreen" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700">Green 532nm</button>
-                <button onclick="setUploadLaserColor('blue')" id="btnUploadBlue" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700">Blue 405nm</button>
-              </div>
-            </div>
-
-            <!-- Peak Centroid Auto-Snap Toggle -->
-            <div class="pt-2 border-t border-zinc-800 flex items-center justify-between">
-              <div>
-                <div class="text-xs text-zinc-200 font-semibold">Sub-Pixel Centroid Snap</div>
-                <div class="text-[11px] text-zinc-500">Local Gaussian intensity-squared CoG</div>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="snapToggle" class="sr-only peer" checked onchange="recalculateMeasurement()">
-                <div class="w-9 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#d1002d]"></div>
-              </label>
-            </div>
-
-            <!-- Process Button -->
-            <button onclick="executeMeasurementNow()" class="brand-btn-primary w-full justify-center py-2.5">
-              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>Execute Precision Measurement</span>
-            </button>
-          </div>
-
-        </div>
-
       </div>
 
     </div>
 
-    <!-- ============================================================== -->
-    <!-- TAB 2: SYNTHETIC OPTICAL RIG SIMULATOR                         -->
-    <!-- ============================================================== -->
-    <div id="sectionSim" class="hidden space-y-6">
-
-      <!-- Preset Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-3 bg-zinc-900/60 p-3 rounded-2xl border border-zinc-800">
-        <span class="text-xs font-mono text-zinc-400 font-semibold uppercase tracking-wider">Calibration Presets:</span>
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="applyPreset('gauge100')" class="brand-btn-secondary">
-            <span>100.00 mm Gauge Block</span>
-          </button>
-          <button onclick="applyPreset('baseline120')" class="brand-btn-primary">
-            <span>120.00 mm Baseline</span>
-          </button>
-          <button onclick="applyPreset('diagonal85')" class="brand-btn-secondary">
-            <span>85.45 mm Diagonal</span>
-          </button>
-          <button onclick="resetDefaults()" class="brand-btn-secondary">
-            <span>Reset</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- Left 8 Cols: Synthetic Canvas & Oscilloscope -->
-        <div class="lg:col-span-8 space-y-4">
-          <div class="brand-tactile-card p-3 md:p-4">
-            <div class="hrl-watermark">HRL</div>
-
-            <!-- Top HUD Badges Inside Card -->
-            <div class="flex items-center justify-between pb-3 px-1">
-              <div class="flex items-center gap-2">
-                <span class="brand-pill-badge">
-                  <span class="brand-pill-dot"></span>
-                  <span class="brand-pill-text">Optics Online</span>
-                </span>
-                <span class="bg-zinc-900/90 text-xs px-2.5 py-1 rounded-full border border-zinc-700/60 font-mono text-zinc-300">
-                  Camera: <span id="camAngleBadge" class="text-amber-400 font-semibold">15.0&deg; Slant</span>
-                </span>
-                <span class="bg-zinc-900/90 text-xs px-2.5 py-1 rounded-full border border-zinc-700/60 font-mono text-zinc-300">
-                  Laser: <span id="wavelengthBadge" class="text-red-400 font-semibold">650 nm Red</span>
-                </span>
-              </div>
-
-              <div class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2.5 py-0.5 rounded-full flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                <span>Planar Homography Active</span>
-              </div>
-            </div>
-
-            <!-- Metrology Surface Canvas -->
-            <canvas id="metrologyCanvas" width="800" height="520" class="w-full h-auto rounded-xl bg-zinc-950 border border-zinc-800/80 block"></canvas>
-
-            <!-- Status Line below canvas -->
-            <div class="flex flex-wrap items-center justify-between pt-3 px-2 text-xs text-zinc-400 gap-2">
-              <div class="flex items-center gap-4">
-                <span class="flex items-center gap-1.5 font-medium text-emerald-400">
-                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block shadow-xs shadow-emerald-500/50"></span> Point A (Drag to Position)
-                </span>
-                <span class="flex items-center gap-1.5 font-medium text-amber-400">
-                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block shadow-xs shadow-amber-500/50"></span> Point B (Drag to Position)
-                </span>
-              </div>
-              <span class="text-zinc-500 font-mono text-[11px]">Click anywhere on workpiece to re-anchor endpoints</span>
-            </div>
-          </div>
-
-          <!-- Sub-Pixel Gaussian Peak Oscilloscope Card -->
-          <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-4 space-y-2">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="w-2 h-2 rounded-full bg-[#d1002d]"></span>
-                <span class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">Gaussian Beam Energy Core Cross-Section (Sub-Pixel Peak Detection)</span>
-              </div>
-              <span class="text-xs font-mono text-zinc-400">Centroid Accuracy: <span class="text-emerald-400 font-bold">&plusmn; 0.05 px</span></span>
-            </div>
-            <canvas id="profileCanvas" width="760" height="90" class="w-full h-24 rounded-lg bg-zinc-950 border border-zinc-800/60"></canvas>
-          </div>
-        </div>
-
-        <!-- Right 4 Cols: Controls -->
-        <div class="lg:col-span-4 space-y-4">
-          <div class="bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950 border border-zinc-800 rounded-2xl p-5 shadow-xl space-y-4">
-            <div class="flex items-center justify-between border-b border-zinc-800/80 pb-3">
-              <span class="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold">Calibrated Metric Output</span>
-              <span class="bg-[#d1002d]/10 text-[#d1002d] border border-[#d1002d]/30 text-[10.5px] px-2.5 py-0.5 rounded-full font-mono font-bold">ISO 10360</span>
-            </div>
-
-            <div class="space-y-1">
-              <div class="text-xs uppercase font-mono text-zinc-400">True Distance (A &rarr; B)</div>
-              <div class="flex items-baseline gap-2">
-                <span id="metricDistance" class="text-4xl md:text-5xl font-black tracking-tight text-white font-mono">120.000</span>
-                <span class="text-2xl font-black text-[#d1002d] font-mono">mm</span>
-              </div>
-              <div class="flex items-center gap-2 text-xs font-mono text-zinc-400 pt-1">
-                <span>95% Confidence Bound:</span>
-                <span id="metricUncertainty" class="text-emerald-400 font-semibold">&plusmn; 0.012 mm (12 &mu;m)</span>
-              </div>
-            </div>
-
-            <!-- Coordinates Breakdown -->
-            <div class="bg-zinc-950/80 rounded-xl p-3 border border-zinc-800/80 space-y-2.5 text-xs font-mono">
-              <div class="flex justify-between items-center pb-2 border-b border-zinc-800/60">
-                <span class="text-emerald-400 font-semibold flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Point A:
-                </span>
-                <span id="ptACoordsMm" class="text-zinc-100 font-bold">X: 40.003 mm, Y: 100.001 mm</span>
-              </div>
-              <div class="flex justify-between items-center text-zinc-400 text-[11px]">
-                <span class="text-zinc-500">Image Sensor Sub-Pixel (px):</span>
-                <span id="ptACoordsPx">u: 295.67, v: 486.96</span>
-              </div>
-
-              <div class="flex justify-between items-center pt-1 pb-2 border-b border-zinc-800/60">
-                <span class="text-amber-400 font-semibold flex items-center gap-1.5">
-                  <span class="w-2 h-2 rounded-full bg-amber-400"></span> Point B:
-                </span>
-                <span id="ptBCoordsMm" class="text-zinc-100 font-bold">X: 159.997 mm, Y: 100.001 mm</span>
-              </div>
-              <div class="flex justify-between items-center text-zinc-400 text-[11px]">
-                <span class="text-zinc-500">Image Sensor Sub-Pixel (px):</span>
-                <span id="ptBCoordsPx">u: 984.33, v: 486.96</span>
-              </div>
-            </div>
-
-            <!-- Skew Warning -->
-            <div class="p-3.5 rounded-xl bg-amber-950/20 border border-amber-900/40 text-xs space-y-2">
-              <div class="flex items-center justify-between font-bold text-amber-300">
-                <span>Why Optical Calibration is Mandatory:</span>
-                <span class="text-[10px] bg-amber-900/50 px-2 py-0.5 rounded font-mono text-amber-200">Perspective Skew</span>
-              </div>
-              <p class="text-zinc-300 leading-relaxed text-[11.5px]">
-                Uncalibrated 2D pixel measurement: <span id="naiveDistance" class="font-mono text-red-400 font-bold">136.8 mm</span> 
-                (<span id="naiveError" class="text-red-400 font-bold">+16.8 mm error</span> due to camera slant).
-                HRL calibrated homography corrects this down to <strong class="text-emerald-300">0.005 mm error</strong>!
-              </p>
-            </div>
-          </div>
-
-          <!-- Camera Rig Controls -->
-          <div class="bg-zinc-900/80 border border-zinc-800 rounded-2xl p-5 space-y-4">
-            <div class="flex items-center gap-2 text-xs font-mono uppercase font-bold tracking-wider text-zinc-300">
-              <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-              <span>Rig Controls</span>
-            </div>
-
-            <div class="space-y-1.5">
-              <div class="flex justify-between text-xs">
-                <span class="text-zinc-400">Camera Angle Tilt (&theta;)</span>
-                <span id="tiltValLabel" class="font-mono text-white font-bold">15.0&deg;</span>
-              </div>
-              <input type="range" id="tiltSlider" min="0" max="35" step="1" value="15" class="w-full accent-red-600 cursor-pointer">
-            </div>
-
-            <div class="space-y-1.5">
-              <label class="text-xs text-zinc-400 block font-medium">Laser Optical Band</label>
-              <div class="grid grid-cols-3 gap-2">
-                <button onclick="setLaserColor('red')" id="btnRed" class="py-1.5 text-xs font-mono font-bold rounded-lg bg-red-950 border border-red-600 text-red-200">Red 650nm</button>
-                <button onclick="setLaserColor('green')" id="btnGreen" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700">Green 532nm</button>
-                <button onclick="setLaserColor('blue')" id="btnBlue" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700">Blue 405nm</button>
-              </div>
-            </div>
-
-            <div class="pt-2 border-t border-zinc-800 flex items-center justify-between">
-              <div>
-                <div class="text-xs text-zinc-200 font-semibold">Factory Ambient Lighting</div>
-                <div class="text-[11px] text-zinc-500">Spectral differencing filter (R - max(G,B))</div>
-              </div>
-              <label class="relative inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="ambientToggle" class="sr-only peer" checked>
-                <div class="w-9 h-5 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-[#d1002d]"></div>
-              </label>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- HRL THREE PILLARS (FOOTER SUMMARY) -->
-    <footer class="pt-4 border-t border-zinc-800/80">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div class="bg-zinc-900/50 rounded-2xl border border-zinc-800/80 p-4">
-          <div class="text-[#d1002d] font-mono text-xs uppercase font-black mb-1">01 &bull; Intensity-Squared CoG</div>
-          <div class="text-white font-bold text-sm">Sub-Pixel Centroid Algorithm</div>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">Extracts the true photon peak down to &plusmn;0.05 px, eliminating camera pixel quantization boundaries.</p>
-        </div>
-
-        <div class="bg-zinc-900/50 rounded-2xl border border-zinc-800/80 p-4">
-          <div class="text-emerald-400 font-mono text-xs uppercase font-black mb-1">02 &bull; Planar Homography</div>
-          <div class="text-white font-bold text-sm">Projective Rectification</div>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">Projects skewed sensor coordinates to true metric millimeters (Xw, Yw), resolving lens foreshortening.</p>
-        </div>
-
-        <div class="bg-zinc-900/50 rounded-2xl border border-zinc-800/80 p-4">
-          <div class="text-amber-400 font-mono text-xs uppercase font-black mb-1">03 &bull; ISO 10360 Uncertainty</div>
-          <div class="text-white font-bold text-sm">Industrial Confidence Bounds</div>
-          <p class="text-xs text-zinc-400 mt-1 leading-relaxed">Computes formal error propagation budgets: &plusmn;0.012 mm repeatability at 95% confidence interval.</p>
-        </div>
-      </div>
+    <!-- CLEAN MINIMALIST FOOTER -->
+    <footer class="pt-4 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-2 font-mono">
+      <span>HRL International Pvt. Ltd. &bull; Industrial Metrology Standard</span>
+      <span>Gaussian CoG Resolution: &plusmn;0.05 px &bull; ISO 10360</span>
     </footer>
 
   </div>
 
   <script>
     /* ========================================================= */
-    /* INDUSTRIAL LASER METROLOGY STATE & DUAL-ENGINE CONTROLLER  */
+    /* HRL MINIMALIST INDUSTRIAL LASER METROLOGY CONTROLLER       */
+    /* Result strictly in Centimeters (cm)                       */
     /* ========================================================= */
 
-    // Tab Switching
-    function switchMainTab(tab) {
-      const secUpload = document.getElementById('sectionUpload');
-      const secSim = document.getElementById('sectionSim');
-      const tabBtnUpload = document.getElementById('tabBtnUpload');
-      const tabBtnSim = document.getElementById('tabBtnSim');
+    const canvas = document.getElementById('inspectionCanvas');
+    const ctx = canvas.getContext('2d');
 
-      if (tab === 'upload') {
-        secUpload.classList.remove('hidden');
-        secSim.classList.add('hidden');
-        tabBtnUpload.classList.add('active');
-        tabBtnSim.classList.remove('active');
-        renderUploadCanvas();
-      } else {
-        secUpload.classList.add('hidden');
-        secSim.classList.remove('hidden');
-        tabBtnUpload.classList.remove('active');
-        tabBtnSim.classList.add('active');
-        updateHUD();
-        renderCanvas();
-        renderProfile();
-      }
-    }
-
-    // =========================================================
-    // UPLOAD PHOTO METROLOGY ENGINE
-    // =========================================================
-    const uploadCanvas = document.getElementById('uploadCanvas');
-    const uctx = uploadCanvas.getContext('2d');
-    const uploadProfileCanvas = document.getElementById('uploadProfileCanvas');
-    const upctx = uploadProfileCanvas.getContext('2d');
-
-    const uploadState = {
+    const state = {
       image: null,
       imageBase64: null,
       imageWidth: 1280,
       imageHeight: 960,
       ptA_px: null,
       ptB_px: null,
-      ptA_mm: null,
-      ptB_mm: null,
-      distance_mm: 120.0,
-      uncertainty_mm: 0.012,
-      gsd_mm_per_px: 0.25,
-      mode: 'pinpoint', // 'pinpoint', 'spots', 'line'
+      ptA_cm: { x: 4.000, y: 10.000 },
+      ptB_cm: { x: 16.000, y: 10.000 },
+      distance_cm: 12.000,
+      uncertainty_cm: 0.001,
       laserColor: 'red',
-      calibMode: 'homography', // 'homography' or 'scale'
-      scale_mm_per_px: 0.250,
-      refineSnap: true,
       dragging: null,
-      serverOverlayImg: null,
-      lastResultPayload: null
+      serverOverlayImg: null
     };
 
-    // Homography matrix from calibration.json (default loaded)
-    const H_W2I = [
-      [5.4988, 0.0000, 77.0146],
-      [0.0000, 3.7488, 112.0232],
-      [0.0000, -0.0000001, 1.0000]
-    ];
-    // Inverted I2W (pixel to world mm)
+    // Calibrated Homography matrix (I2W: pixel to world millimeters)
     const H_I2W = [
       [0.18185, 0.0000, -13.998],
       [0.0000, 0.26675, -29.882],
       [0.0000, 0.0000, 1.0000]
     ];
 
-    function pixelToWorld(u, v) {
-      if (uploadState.calibMode === 'scale') {
-        const s = uploadState.scale_mm_per_px || 0.25;
-        return { x: u * s, y: v * s };
-      }
-      // Homography transform
-      const x = (H_I2W[0][0] * u + H_I2W[0][1] * v + H_I2W[0][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
-      const y = (H_I2W[1][0] * u + H_I2W[1][1] * v + H_I2W[1][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
-      return { x, y };
+    function pixelToWorldCm(u, v) {
+      // Perspective projection to physical mm, converted to cm (1 cm = 10 mm)
+      const x_mm = (H_I2W[0][0] * u + H_I2W[0][1] * v + H_I2W[0][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
+      const y_mm = (H_I2W[1][0] * u + H_I2W[1][1] * v + H_I2W[1][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
+      return { x: x_mm / 10.0, y: y_mm / 10.0 };
     }
 
-    // Drag and Drop
+    // Drag and Drop Handling
     function handleDragOver(e) {
       e.preventDefault();
       document.getElementById('dropZone').classList.add('dragover');
@@ -802,25 +441,24 @@
     function loadUploadedFile(file) {
       const reader = new FileReader();
       reader.onload = function(evt) {
-        uploadState.imageBase64 = evt.target.result;
+        state.imageBase64 = evt.target.result;
         const img = new Image();
         img.onload = function() {
-          uploadState.image = img;
-          uploadState.imageWidth = img.naturalWidth || img.width;
-          uploadState.imageHeight = img.naturalHeight || img.height;
-          uploadCanvas.width = uploadState.imageWidth;
-          uploadCanvas.height = uploadState.imageHeight;
+          state.image = img;
+          state.imageWidth = img.naturalWidth || img.width;
+          state.imageHeight = img.naturalHeight || img.height;
+          canvas.width = state.imageWidth;
+          canvas.height = state.imageHeight;
 
-          document.getElementById('imgInfoBadge').innerHTML = `Resolution: <span class="text-white font-semibold">${uploadState.imageWidth} &times; ${uploadState.imageHeight} px</span>`;
-          document.getElementById('uploadEngineBadge').innerText = 'Photo Ingested';
+          document.getElementById('resolutionBadge').innerText = `${state.imageWidth} \u00D7 ${state.imageHeight} px`;
+          document.getElementById('engineBadge').innerText = 'Photo Loaded';
 
-          // Reset points or auto detect
-          uploadState.ptA_px = null;
-          uploadState.ptB_px = null;
-          uploadState.serverOverlayImg = null;
+          state.ptA_px = null;
+          state.ptB_px = null;
+          state.serverOverlayImg = null;
 
-          // Attempt server-side or local auto-detect
-          runAutoMeasurement();
+          document.getElementById('instructionText').innerText = "Click Point A and Point B on your laser to measure";
+          executeServerMeasurement();
         };
         img.src = evt.target.result;
       };
@@ -829,96 +467,63 @@
 
     function loadSampleTestImage() {
       const img = new Image();
-      img.crossOrigin = "anonymous";
       img.onload = function() {
-        uploadState.image = img;
-        uploadState.imageWidth = img.width;
-        uploadState.imageHeight = img.height;
-        uploadCanvas.width = img.width;
-        uploadCanvas.height = img.height;
+        state.image = img;
+        state.imageWidth = img.width;
+        state.imageHeight = img.height;
+        canvas.width = img.width;
+        canvas.height = img.height;
 
-        // Convert to base64
-        const offCanvas = document.createElement('canvas');
-        offCanvas.width = img.width;
-        offCanvas.height = img.height;
-        const offCtx = offCanvas.getContext('2d');
-        offCtx.drawImage(img, 0, 0);
-        uploadState.imageBase64 = offCanvas.toDataURL('image/png');
+        const off = document.createElement('canvas');
+        off.width = img.width;
+        off.height = img.height;
+        const octx = off.getContext('2d');
+        octx.drawImage(img, 0, 0);
+        state.imageBase64 = off.toDataURL('image/png');
 
-        document.getElementById('imgInfoBadge').innerHTML = `Resolution: <span class="text-white font-semibold">${img.width} &times; ${img.height} px (Sample)</span>`;
-        document.getElementById('uploadEngineBadge').innerText = 'Sample Loaded';
+        document.getElementById('resolutionBadge').innerText = `${img.width} \u00D7 ${img.height} px (Sample)`;
+        document.getElementById('engineBadge').innerText = 'Sample Loaded';
 
-        // Initialize default points on sample
-        uploadState.ptA_px = { u: 296.96, v: 486.96 };
-        uploadState.ptB_px = { u: 983.04, v: 486.96 };
-        uploadState.serverOverlayImg = null;
+        // Calibrated baseline points for sample
+        state.ptA_px = { u: 296.96, v: 486.96 };
+        state.ptB_px = { u: 983.04, v: 486.96 };
+        state.serverOverlayImg = null;
 
         recalculateMeasurement();
       };
       img.src = "sample_laser_test.png";
     }
 
-    function setInspectionMode(mode) {
-      uploadState.mode = mode;
-      document.getElementById('btnModePinpoint').className = mode === 'pinpoint' ? 'px-2.5 py-1 rounded-lg bg-zinc-800 text-white font-bold border border-zinc-700' : 'px-2.5 py-1 rounded-lg text-zinc-400 hover:text-white';
-      document.getElementById('btnModeSpots').className = mode === 'spots' ? 'px-2.5 py-1 rounded-lg bg-zinc-800 text-white font-bold border border-zinc-700' : 'px-2.5 py-1 rounded-lg text-zinc-400 hover:text-white';
-      document.getElementById('btnModeLine').className = mode === 'line' ? 'px-2.5 py-1 rounded-lg bg-zinc-800 text-white font-bold border border-zinc-700' : 'px-2.5 py-1 rounded-lg text-zinc-400 hover:text-white';
-
-      const prompt = document.getElementById('promptText');
-      if (mode === 'pinpoint') {
-        prompt.innerText = "Click anywhere to place Point A, then Point B";
-      } else if (mode === 'spots') {
-        prompt.innerText = "Auto-Detecting 2 Gaussian Laser Spots";
-        runAutoMeasurement();
-      } else {
-        prompt.innerText = "Auto-Detecting Continuous Laser Line Extrema";
-        runAutoMeasurement();
-      }
-      renderUploadCanvas();
-    }
-
-    function setUploadLaserColor(color) {
-      uploadState.laserColor = color;
-      ['btnUploadRed', 'btnUploadGreen', 'btnUploadBlue'].forEach(id => {
-        document.getElementById(id).className = 'py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700';
+    function setLaserColor(color) {
+      state.laserColor = color;
+      ['btnRed', 'btnGreen', 'btnBlue'].forEach(id => {
+        document.getElementById(id).className = 'py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300';
       });
       if (color === 'red') {
-        document.getElementById('btnUploadRed').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-red-950 border border-red-600 text-red-200';
+        document.getElementById('btnRed').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-red-50 border border-red-300 text-red-700';
       } else if (color === 'green') {
-        document.getElementById('btnUploadGreen').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-emerald-950 border border-emerald-600 text-emerald-200';
+        document.getElementById('btnGreen').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-700';
       } else {
-        document.getElementById('btnUploadBlue').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-950 border border-blue-600 text-blue-200';
-      }
-      recalculateMeasurement();
-    }
-
-    function handleCalibModeChange() {
-      const mode = document.querySelector('input[name="calibMode"]:checked').value;
-      uploadState.calibMode = mode;
-      const scaleContainer = document.getElementById('scaleFactorContainer');
-      if (mode === 'scale') {
-        scaleContainer.classList.remove('hidden');
-      } else {
-        scaleContainer.classList.add('hidden');
+        document.getElementById('btnBlue').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-50 border border-blue-300 text-blue-700';
       }
       recalculateMeasurement();
     }
 
     function clearPoints() {
-      uploadState.ptA_px = null;
-      uploadState.ptB_px = null;
-      uploadState.serverOverlayImg = null;
+      state.ptA_px = null;
+      state.ptB_px = null;
+      state.serverOverlayImg = null;
       document.getElementById('labelPtAPx').innerText = 'Pending';
       document.getElementById('labelPtBPx').innerText = 'Pending';
-      document.getElementById('promptText').innerText = "Click anywhere to place Point A, then Point B";
-      renderUploadCanvas();
+      document.getElementById('instructionText').innerText = "Click Point A and Point B on your laser to measure";
+      renderCanvas();
     }
 
-    // Local Sub-Pixel Peak Centroid Search in ROI
-    function findSubpixelPeak(x, y, radius = 20) {
-      if (!uploadState.image) return { u: x, v: y };
-      const w = uploadCanvas.width;
-      const h = uploadCanvas.height;
+    // Sub-Pixel Centroid Detection in Local ROI (+/- 0.05 px)
+    function findSubpixelPeak(x, y, radius = 22) {
+      if (!state.image) return { u: x, v: y };
+      const w = canvas.width;
+      const h = canvas.height;
       const ix0 = Math.max(0, Math.floor(x - radius));
       const ix1 = Math.min(w - 1, Math.ceil(x + radius));
       const iy0 = Math.max(0, Math.floor(y - radius));
@@ -927,12 +532,11 @@
       const rh = iy1 - iy0 + 1;
       if (rw <= 0 || rh <= 0) return { u: x, v: y };
 
-      const imgData = uctx.getImageData(ix0, iy0, rw, rh).data;
+      const imgData = ctx.getImageData(ix0, iy0, rw, rh).data;
       let maxVal = -1;
       let max_lx = 0;
       let max_ly = 0;
 
-      // Find coarse peak with color differencing
       for (let ly = 0; ly < rh; ly++) {
         for (let lx = 0; lx < rw; lx++) {
           const idx = (ly * rw + lx) * 4;
@@ -940,9 +544,9 @@
           const g = imgData[idx + 1];
           const b = imgData[idx + 2];
           let val = 0;
-          if (uploadState.laserColor === 'red') {
+          if (state.laserColor === 'red') {
             val = Math.max(0, r - Math.max(g, b));
-          } else if (uploadState.laserColor === 'green') {
+          } else if (state.laserColor === 'green') {
             val = Math.max(0, g - Math.max(r, b));
           } else {
             val = Math.max(0, b - Math.max(r, g));
@@ -955,8 +559,7 @@
         }
       }
 
-      // If peak is prominent, compute intensity-squared Gaussian CoG
-      if (maxVal > 25) {
+      if (maxVal > 20) {
         let sumW = 0;
         let sumWX = 0;
         let sumWY = 0;
@@ -971,9 +574,9 @@
               const g = imgData[idx + 1];
               const b = imgData[idx + 2];
               let val = 0;
-              if (uploadState.laserColor === 'red') {
+              if (state.laserColor === 'red') {
                 val = Math.max(0, r - Math.max(g, b));
-              } else if (uploadState.laserColor === 'green') {
+              } else if (state.laserColor === 'green') {
                 val = Math.max(0, g - Math.max(r, b));
               } else {
                 val = Math.max(0, b - Math.max(r, g));
@@ -992,256 +595,223 @@
       return { u: x, v: y };
     }
 
-    // Canvas Click & Drag Handling
-    uploadCanvas.addEventListener('mousedown', (e) => {
-      if (!uploadState.image) return;
-      const rect = uploadCanvas.getBoundingClientRect();
-      const scaleX = uploadCanvas.width / rect.width;
-      const scaleY = uploadCanvas.height / rect.height;
+    // Canvas Interactive Click & Drag
+    canvas.addEventListener('mousedown', (e) => {
+      if (!state.image) return;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
       const clickU = (e.clientX - rect.left) * scaleX;
       const clickV = (e.clientY - rect.top) * scaleY;
 
-      // Check if clicking near existing point to drag
       const hitRadius = 24;
-      if (uploadState.ptA_px && Math.hypot(uploadState.ptA_px.u - clickU, uploadState.ptA_px.v - clickV) < hitRadius) {
-        uploadState.dragging = 'ptA';
+      if (state.ptA_px && Math.hypot(state.ptA_px.u - clickU, state.ptA_px.v - clickV) < hitRadius) {
+        state.dragging = 'ptA';
         return;
       }
-      if (uploadState.ptB_px && Math.hypot(uploadState.ptB_px.u - clickU, uploadState.ptB_px.v - clickV) < hitRadius) {
-        uploadState.dragging = 'ptB';
+      if (state.ptB_px && Math.hypot(state.ptB_px.u - clickU, state.ptB_px.v - clickV) < hitRadius) {
+        state.dragging = 'ptB';
         return;
       }
 
-      // Pinpoint mode assignment
       const doSnap = document.getElementById('snapToggle').checked;
       const pt = doSnap ? findSubpixelPeak(clickU, clickV) : { u: clickU, v: clickV };
 
-      if (!uploadState.ptA_px) {
-        uploadState.ptA_px = pt;
-        document.getElementById('promptText').innerText = "Point A placed. Now click to place Point B.";
-      } else if (!uploadState.ptB_px) {
-        uploadState.ptB_px = pt;
-        document.getElementById('promptText').innerText = "Measurement locked. Drag points or click to adjust.";
+      if (!state.ptA_px) {
+        state.ptA_px = pt;
+        document.getElementById('instructionText').innerText = "Point A placed. Now click Point B.";
+      } else if (!state.ptB_px) {
+        state.ptB_px = pt;
+        document.getElementById('instructionText').innerText = "Measurement locked. Drag points or click to adjust.";
       } else {
-        // Closer point replaces
-        const distA = Math.hypot(uploadState.ptA_px.u - clickU, uploadState.ptA_px.v - clickV);
-        const distB = Math.hypot(uploadState.ptB_px.u - clickU, uploadState.ptB_px.v - clickV);
-        if (distA <= distB) {
-          uploadState.ptA_px = pt;
-        } else {
-          uploadState.ptB_px = pt;
-        }
+        const distA = Math.hypot(state.ptA_px.u - clickU, state.ptA_px.v - clickV);
+        const distB = Math.hypot(state.ptB_px.u - clickU, state.ptB_px.v - clickV);
+        if (distA <= distB) state.ptA_px = pt;
+        else state.ptB_px = pt;
       }
 
-      uploadState.serverOverlayImg = null;
+      state.serverOverlayImg = null;
       recalculateMeasurement();
     });
 
-    uploadCanvas.addEventListener('mousemove', (e) => {
-      if (!uploadState.dragging) return;
-      const rect = uploadCanvas.getBoundingClientRect();
-      const scaleX = uploadCanvas.width / rect.width;
-      const scaleY = uploadCanvas.height / rect.height;
+    canvas.addEventListener('mousemove', (e) => {
+      if (!state.dragging) return;
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
       const clickU = (e.clientX - rect.left) * scaleX;
       const clickV = (e.clientY - rect.top) * scaleY;
 
       const doSnap = document.getElementById('snapToggle').checked;
       const pt = doSnap ? findSubpixelPeak(clickU, clickV) : { u: clickU, v: clickV };
 
-      if (uploadState.dragging === 'ptA') {
-        uploadState.ptA_px = pt;
-      } else if (uploadState.dragging === 'ptB') {
-        uploadState.ptB_px = pt;
-      }
-      uploadState.serverOverlayImg = null;
+      if (state.dragging === 'ptA') state.ptA_px = pt;
+      else if (state.dragging === 'ptB') state.ptB_px = pt;
+
+      state.serverOverlayImg = null;
       recalculateMeasurement();
     });
 
     window.addEventListener('mouseup', () => {
-      uploadState.dragging = null;
+      state.dragging = null;
     });
 
-    // Dual Engine Execution: Try Server API, Fall Back to Client Metrology
-    async function executeMeasurementNow() {
-      if (!uploadState.image) {
-        loadSampleTestImage();
-        return;
-      }
-
-      const scaleVal = document.getElementById('inputScaleFactor').value;
-      uploadState.scale_mm_per_px = parseFloat(scaleVal) || 0.25;
+    // Measurement & Centimeter Calculation
+    async function executeServerMeasurement() {
+      if (!state.image) return;
 
       const payload = {
-        image_base64: uploadState.imageBase64,
-        pt_a: uploadState.ptA_px ? [uploadState.ptA_px.u, uploadState.ptA_px.v] : null,
-        pt_b: uploadState.ptB_px ? [uploadState.ptB_px.u, uploadState.ptB_px.v] : null,
-        scale_mm_per_px: uploadState.calibMode === 'scale' ? uploadState.scale_mm_per_px : null,
-        color: uploadState.laserColor,
-        mode: uploadState.mode,
+        image_base64: state.imageBase64,
+        pt_a: state.ptA_px ? [state.ptA_px.u, state.ptA_px.v] : null,
+        pt_b: state.ptB_px ? [state.ptB_px.u, state.ptB_px.v] : null,
+        color: state.laserColor,
+        mode: "spots",
         refine_peaks: document.getElementById('snapToggle').checked
       };
 
       try {
-        const response = await fetch('/api/measure', {
+        const resp = await fetch('/api/measure', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
-
-        if (response.ok) {
-          const data = await response.json();
+        if (resp.ok) {
+          const data = await resp.json();
           if (data.success && data.result) {
-            applyServerMeasurementResult(data);
+            const res = data.result;
+            state.ptA_px = { u: res.point_a_px[0], v: res.point_a_px[1] };
+            state.ptB_px = { u: res.point_b_px[0], v: res.point_b_px[1] };
+            
+            // Centimeters strictly
+            state.distance_cm = res.distance_cm || (res.distance_mm / 10.0);
+            state.uncertainty_cm = res.uncertainty_cm || (res.uncertainty_mm / 10.0);
+            state.ptA_cm = { x: res.point_a_cm ? res.point_a_cm[0] : (res.point_a_mm[0] / 10.0), y: res.point_a_cm ? res.point_a_cm[1] : (res.point_a_mm[1] / 10.0) };
+            state.ptB_cm = { x: res.point_b_cm ? res.point_b_cm[0] : (res.point_b_mm[0] / 10.0), y: res.point_b_cm ? res.point_b_cm[1] : (res.point_b_mm[1] / 10.0) };
+
+            updateHUD();
+            renderCanvas();
             return;
           }
         }
-      } catch (err) {
-        console.log("Local Python server offline or standalone preview; using client-side metrology engine.");
+      } catch (e) {
+        // Fallback to client metrology
       }
 
-      // Client-side fallback computation
       recalculateMeasurement();
     }
 
-    function applyServerMeasurementResult(data) {
-      const res = data.result;
-      uploadState.ptA_px = { u: res.point_a_px[0], v: res.point_a_px[1] };
-      uploadState.ptB_px = { u: res.point_b_px[0], v: res.point_b_px[1] };
-      uploadState.ptA_mm = { x: res.point_a_mm[0], y: res.point_a_mm[1] };
-      uploadState.ptB_mm = { x: res.point_b_mm[0], y: res.point_b_mm[1] };
-      uploadState.distance_mm = res.distance_mm;
-      uploadState.uncertainty_mm = res.uncertainty_mm;
-      uploadState.gsd_mm_per_px = res.gsd_mm_per_px;
-      uploadState.lastResultPayload = data;
-
-      if (data.overlay_base64) {
-        const ovImg = new Image();
-        ovImg.onload = () => {
-          uploadState.serverOverlayImg = ovImg;
-          renderUploadCanvas();
-        };
-        ovImg.src = data.overlay_base64;
-      }
-
-      updateUploadHUD();
-      renderUploadProfile();
-    }
-
-    function runAutoMeasurement() {
-      executeMeasurementNow();
+    function autoDetectSpots() {
+      executeServerMeasurement();
     }
 
     function recalculateMeasurement() {
-      if (!uploadState.ptA_px || !uploadState.ptB_px) {
-        renderUploadCanvas();
+      if (!state.ptA_px || !state.ptB_px) {
+        renderCanvas();
         return;
       }
 
-      const scaleVal = document.getElementById('inputScaleFactor').value;
-      uploadState.scale_mm_per_px = parseFloat(scaleVal) || 0.25;
+      const pa_cm = pixelToWorldCm(state.ptA_px.u, state.ptA_px.v);
+      const pb_cm = pixelToWorldCm(state.ptB_px.u, state.ptB_px.v);
+      state.ptA_cm = pa_cm;
+      state.ptB_cm = pb_cm;
 
-      const pa_mm = pixelToWorld(uploadState.ptA_px.u, uploadState.ptA_px.v);
-      const pb_mm = pixelToWorld(uploadState.ptB_px.u, uploadState.ptB_px.v);
-      uploadState.ptA_mm = pa_mm;
-      uploadState.ptB_mm = pb_mm;
+      // Distance in centimeters (cm)
+      const dx_cm = pb_cm.x - pa_cm.x;
+      const dy_cm = pb_cm.y - pa_cm.y;
+      state.distance_cm = Math.hypot(dx_cm, dy_cm);
 
-      const dx = pb_mm.x - pa_mm.x;
-      const dy = pb_mm.y - pa_mm.y;
-      const dist = Math.hypot(dx, dy);
-      uploadState.distance_mm = dist;
+      // Uncertainty in centimeters (cm)
+      const pxDist = Math.hypot(state.ptB_px.u - state.ptA_px.u, state.ptB_px.v - state.ptA_px.v);
+      const gsd_cm = state.distance_cm / Math.max(1e-6, pxDist);
+      state.uncertainty_cm = Math.sqrt(2.0 * Math.pow(gsd_cm * 0.05, 2) + 0.0000005);
 
-      const pxDist = Math.hypot(uploadState.ptB_px.u - uploadState.ptA_px.u, uploadState.ptB_px.v - uploadState.ptA_px.v);
-      const gsd = dist / Math.max(1e-6, pxDist);
-      uploadState.gsd_mm_per_px = gsd;
-      const uncertainty = Math.sqrt(2.0 * Math.pow(gsd * 0.05, 2) + 0.00005);
-      uploadState.uncertainty_mm = uncertainty;
-
-      updateUploadHUD();
-      renderUploadCanvas();
-      renderUploadProfile();
+      updateHUD();
+      renderCanvas();
     }
 
-    function updateUploadHUD() {
-      if (!uploadState.ptA_px || !uploadState.ptB_px) return;
+    function updateHUD() {
+      if (!state.ptA_px || !state.ptB_px) return;
 
-      document.getElementById('uploadMetricDist').innerText = uploadState.distance_mm.toFixed(3);
-      document.getElementById('uploadMetricUncert').innerText = `\u00B1 ${uploadState.uncertainty_mm.toFixed(3)} mm (${Math.round(uploadState.uncertainty_mm * 1000)} \u03BCm)`;
+      // Result strictly in Centimeters (cm)
+      document.getElementById('metricDistCm').innerText = state.distance_cm.toFixed(3);
+      
+      const uncertMicrons = Math.round(state.uncertainty_cm * 10000);
+      document.getElementById('metricUncertCm').innerText = `\u00B1 ${state.uncertainty_cm.toFixed(4)} cm (${uncertMicrons} \u03BCm)`;
 
-      document.getElementById('uploadPtAMm').innerText = `X: ${uploadState.ptA_mm.x.toFixed(3)} mm, Y: ${uploadState.ptA_mm.y.toFixed(3)} mm`;
-      document.getElementById('uploadPtAPxVal').innerText = `u: ${uploadState.ptA_px.u.toFixed(2)}, v: ${uploadState.ptA_px.v.toFixed(2)}`;
-      document.getElementById('labelPtAPx').innerText = `(${uploadState.ptA_px.u.toFixed(1)}, ${uploadState.ptA_px.v.toFixed(1)})`;
+      document.getElementById('coordPtACm').innerText = `X: ${state.ptA_cm.x.toFixed(3)} cm, Y: ${state.ptA_cm.y.toFixed(3)} cm`;
+      document.getElementById('coordPtBCm').innerText = `X: ${state.ptB_cm.x.toFixed(3)} cm, Y: ${state.ptB_cm.y.toFixed(3)} cm`;
 
-      document.getElementById('uploadPtBMm').innerText = `X: ${uploadState.ptB_mm.x.toFixed(3)} mm, Y: ${uploadState.ptB_mm.y.toFixed(3)} mm`;
-      document.getElementById('uploadPtBPxVal').innerText = `u: ${uploadState.ptB_px.u.toFixed(2)}, v: ${uploadState.ptB_px.v.toFixed(2)}`;
-      document.getElementById('labelPtBPx').innerText = `(${uploadState.ptB_px.u.toFixed(1)}, ${uploadState.ptB_px.v.toFixed(1)})`;
+      document.getElementById('labelPtAPx').innerText = `(${state.ptA_px.u.toFixed(1)}, ${state.ptA_px.v.toFixed(1)})`;
+      document.getElementById('labelPtBPx').innerText = `(${state.ptB_px.u.toFixed(1)}, ${state.ptB_px.v.toFixed(1)})`;
+
+      const distMm = state.distance_cm * 10.0;
+      document.getElementById('metricDistMm').innerText = `${distMm.toFixed(3)} mm`;
     }
 
-    function renderUploadCanvas() {
-      uctx.clearRect(0, 0, uploadCanvas.width, uploadCanvas.height);
+    function renderCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw uploaded image or server overlay
-      if (uploadState.serverOverlayImg) {
-        uctx.drawImage(uploadState.serverOverlayImg, 0, 0, uploadCanvas.width, uploadCanvas.height);
+      if (state.serverOverlayImg) {
+        ctx.drawImage(state.serverOverlayImg, 0, 0, canvas.width, canvas.height);
         return;
       }
 
-      if (uploadState.image) {
-        uctx.drawImage(uploadState.image, 0, 0, uploadCanvas.width, uploadCanvas.height);
+      if (state.image) {
+        ctx.drawImage(state.image, 0, 0, canvas.width, canvas.height);
       } else {
-        // Blank placeholder state
-        uctx.fillStyle = '#09090b';
-        uctx.fillRect(0, 0, uploadCanvas.width, uploadCanvas.height);
-        uctx.fillStyle = '#27272a';
-        uctx.font = '14px -apple-system, sans-serif';
-        uctx.textAlign = 'center';
-        uctx.fillText('Please upload an inspection image or click "Load Sample Frame"', uploadCanvas.width / 2, uploadCanvas.height / 2);
+        // Clean Light Canvas Placeholder
+        ctx.fillStyle = '#fafafc';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#86868b';
+        ctx.font = '14px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Please upload an image or click "Load Calibrated Sample"', canvas.width / 2, canvas.height / 2);
         return;
       }
 
-      // Draw Measurement Line and HUD overlay
-      if (uploadState.ptA_px && uploadState.ptB_px) {
-        const pa = uploadState.ptA_px;
-        const pb = uploadState.ptB_px;
+      // Draw Calibrated Measurement Line
+      if (state.ptA_px && state.ptB_px) {
+        const pa = state.ptA_px;
+        const pb = state.ptB_px;
 
-        // Measurement Ray
-        uctx.beginPath();
-        uctx.moveTo(pa.u, pa.v);
-        uctx.lineTo(pb.u, pb.v);
-        uctx.strokeStyle = '#00f0ff';
-        uctx.lineWidth = 2.5;
-        uctx.setLineDash([6, 3]);
-        uctx.stroke();
-        uctx.setLineDash([]);
+        ctx.beginPath();
+        ctx.moveTo(pa.u, pa.v);
+        ctx.lineTo(pb.u, pb.v);
+        ctx.strokeStyle = '#00f0ff';
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([6, 3]);
+        ctx.stroke();
+        ctx.setLineDash([]);
 
-        // Center Dimension Badge
+        // Dimension Badge in Centimeters (cm)
         const midU = (pa.u + pb.u) / 2;
         const midV = (pa.v + pb.v) / 2;
-        uctx.save();
-        uctx.translate(midU, midV - 14);
-        uctx.fillStyle = 'rgba(9, 9, 11, 0.88)';
-        uctx.strokeStyle = '#00f0ff';
-        uctx.lineWidth = 1;
-        uctx.beginPath();
-        uctx.roundRect(-70, -14, 140, 26, 6);
-        uctx.fill();
-        uctx.stroke();
+        ctx.save();
+        ctx.translate(midU, midV - 14);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+        ctx.strokeStyle = '#d1002d';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.roundRect(-75, -14, 150, 26, 6);
+        ctx.fill();
+        ctx.stroke();
 
-        uctx.fillStyle = '#ffffff';
-        uctx.font = 'bold 12px JetBrains Mono, monospace';
-        uctx.textAlign = 'center';
-        uctx.textBaseline = 'middle';
-        uctx.fillText(`${uploadState.distance_mm.toFixed(3)} mm`, 0, -1);
-        uctx.restore();
+        ctx.fillStyle = '#1d1d1f';
+        ctx.font = 'bold 12px JetBrains Mono, monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(`${state.distance_cm.toFixed(3)} cm`, 0, -1);
+        ctx.restore();
       }
 
-      // Draw Point A Target
-      if (uploadState.ptA_px) {
-        drawReticle(uctx, uploadState.ptA_px.u, uploadState.ptA_px.v, '#10b981', 'POINT A');
+      // Draw Point A Reticle
+      if (state.ptA_px) {
+        drawReticle(ctx, state.ptA_px.u, state.ptA_px.v, '#10b981', 'POINT A');
       }
 
-      // Draw Point B Target
-      if (uploadState.ptB_px) {
-        drawReticle(uctx, uploadState.ptB_px.u, uploadState.ptB_px.v, '#f59e0b', 'POINT B');
+      // Draw Point B Reticle
+      if (state.ptB_px) {
+        drawReticle(ctx, state.ptB_px.u, state.ptB_px.v, '#f59e0b', 'POINT B');
       }
     }
 
@@ -1268,449 +838,57 @@
       ctx.lineWidth = 1.2;
       ctx.stroke();
 
-      // Label Pill
-      ctx.fillStyle = 'rgba(9, 9, 11, 0.9)';
+      // Reticle Label Badge
+      ctx.fillStyle = '#ffffff';
       ctx.strokeStyle = color;
       ctx.lineWidth = 1;
       ctx.beginPath();
-      ctx.roundRect(u + 16, v - 20, 70, 18, 4);
+      ctx.roundRect(u + 16, v - 20, 68, 18, 4);
       ctx.fill();
       ctx.stroke();
 
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 10px JetBrains Mono, monospace';
+      ctx.fillStyle = '#1d1d1f';
+      ctx.font = 'bold 9.5px JetBrains Mono, monospace';
       ctx.textAlign = 'center';
-      ctx.fillText(label, u + 51, v - 7);
+      ctx.fillText(label, u + 50, v - 7);
       ctx.restore();
-    }
-
-    function renderUploadProfile() {
-      upctx.clearRect(0, 0, uploadProfileCanvas.width, uploadProfileCanvas.height);
-      const w = uploadProfileCanvas.width;
-      const h = uploadProfileCanvas.height;
-
-      // Dark baseline
-      upctx.fillStyle = '#09090b';
-      upctx.fillRect(0, 0, w, h);
-
-      // Grid lines
-      upctx.strokeStyle = '#18181b';
-      upctx.lineWidth = 1;
-      for (let y = 15; y < h; y += 20) {
-        upctx.beginPath();
-        upctx.moveTo(0, y);
-        upctx.lineTo(w, y);
-        upctx.stroke();
-      }
-
-      // Peak A Curve (Emerald)
-      upctx.beginPath();
-      const midA = w * 0.28;
-      for (let x = 0; x < w * 0.5; x++) {
-        const dist = Math.abs(x - midA);
-        const intensity = Math.exp(-Math.pow(dist, 2) / (2 * Math.pow(18, 2)));
-        const y = h - 10 - intensity * (h - 25);
-        if (x === 0) upctx.moveTo(x, y);
-        else upctx.lineTo(x, y);
-      }
-      upctx.strokeStyle = '#10b981';
-      upctx.lineWidth = 2.5;
-      upctx.stroke();
-
-      // Peak B Curve (Amber)
-      upctx.beginPath();
-      const midB = w * 0.72;
-      for (let x = w * 0.5; x < w; x++) {
-        const dist = Math.abs(x - midB);
-        const intensity = Math.exp(-Math.pow(dist, 2) / (2 * Math.pow(18, 2)));
-        const y = h - 10 - intensity * (h - 25);
-        if (x === Math.floor(w * 0.5)) upctx.moveTo(x, y);
-        else upctx.lineTo(x, y);
-      }
-      upctx.strokeStyle = '#f59e0b';
-      upctx.lineWidth = 2.5;
-      upctx.stroke();
-
-      // Peak Marker Labels
-      upctx.fillStyle = '#10b981';
-      upctx.font = '10px JetBrains Mono, monospace';
-      upctx.fillText('Peak A Centroid: ' + (uploadState.ptA_px ? uploadState.ptA_px.u.toFixed(2) : '---') + ' px', midA - 40, 16);
-
-      upctx.fillStyle = '#f59e0b';
-      upctx.fillText('Peak B Centroid: ' + (uploadState.ptB_px ? uploadState.ptB_px.u.toFixed(2) : '---') + ' px', midB - 40, 16);
     }
 
     function exportInspectionPNG() {
       const link = document.createElement('a');
-      link.download = `laser_inspection_${Date.now()}.png`;
-      link.href = uploadCanvas.toDataURL('image/png');
+      link.download = `laser_inspection_${state.distance_cm.toFixed(3)}cm.png`;
+      link.href = canvas.toDataURL('image/png');
       link.click();
     }
 
-    function copyInspectionJSON() {
+    function copyMeasurementJSON() {
       const payload = {
-        standard: "ISO 10360-2",
-        inspection_time_utc: new Date().toISOString(),
-        calibrated_distance_mm: uploadState.distance_mm,
-        uncertainty_budget_mm: uploadState.uncertainty_mm,
+        organization: "HRL International Pvt. Ltd.",
+        standard: "ISO 10360",
+        measured_distance_cm: state.distance_cm,
+        uncertainty_cm: state.uncertainty_cm,
+        measured_distance_mm: state.distance_cm * 10.0,
+        uncertainty_mm: state.uncertainty_cm * 10.0,
         point_a: {
-          pixel: uploadState.ptA_px,
-          world_mm: uploadState.ptA_mm
+          pixel: state.ptA_px,
+          coordinates_cm: state.ptA_cm
         },
         point_b: {
-          pixel: uploadState.ptB_px,
-          world_mm: uploadState.ptB_mm
+          pixel: state.ptB_px,
+          coordinates_cm: state.ptB_cm
         },
-        gsd_mm_per_px: uploadState.gsd_mm_per_px,
-        calibration_mode: uploadState.calibMode
+        timestamp_utc: new Date().toISOString()
       };
       navigator.clipboard.writeText(JSON.stringify(payload, null, 2)).then(() => {
-        const btn = document.getElementById('copyJsonBtnText');
+        const btn = document.getElementById('btnCopyText');
         btn.innerText = 'Copied!';
-        setTimeout(() => { btn.innerText = 'Copy JSON'; }, 2000);
+        setTimeout(() => { btn.innerText = 'Copy Data'; }, 2000);
       });
     }
 
-    // =========================================================
-    // SYNTHETIC OPTICAL RIG SIMULATOR LOGIC
-    // =========================================================
-    const canvas = document.getElementById('metrologyCanvas');
-    const ctx = canvas.getContext('2d');
-    const profileCanvas = document.getElementById('profileCanvas');
-    const pctx = profileCanvas.getContext('2d');
-
-    const state = {
-      tiltDeg: 15.0,
-      laserColor: 'red',
-      ambientNoise: true,
-      ptA_mm: { x: 40.0, y: 100.0 },
-      ptB_mm: { x: 160.0, y: 100.0 },
-      dragging: null
-    };
-
-    function worldToPixel(x_mm, y_mm) {
-      const tiltRad = (state.tiltDeg * Math.PI) / 180.0;
-      const tiltFactor = Math.sin(tiltRad) * 0.75;
-      const fids_mm = [[20, 20], [180, 20], [180, 180], [20, 180]];
-      const fids_px = [
-        [150.0, 130.0],
-        [650.0, 130.0],
-        [650.0 + tiltFactor * 130.0, 430.0],
-        [150.0 - tiltFactor * 130.0, 430.0]
-      ];
-      const normX = (x_mm - 20) / 160.0;
-      const normY = (y_mm - 20) / 160.0;
-      const topX = fids_px[0][0] + normX * (fids_px[1][0] - fids_px[0][0]);
-      const topY = fids_px[0][1];
-      const btmX = fids_px[3][0] + normX * (fids_px[2][0] - fids_px[3][0]);
-      const btmY = fids_px[3][1];
-      const u = topX + normY * (btmX - topX);
-      const v = topY + normY * (btmY - topY);
-      return { u, v };
-    }
-
-    function pixelToWorldSim(u, v) {
-      const tiltRad = (state.tiltDeg * Math.PI) / 180.0;
-      const tiltFactor = Math.sin(tiltRad) * 0.75;
-      const topY = 130.0;
-      const btmY = 430.0;
-      const normY = (v - topY) / (btmY - topY);
-      const leftX = 150.0 - normY * tiltFactor * 130.0;
-      const rightX = 650.0 + normY * tiltFactor * 130.0;
-      const normX = (u - leftX) / (rightX - leftX);
-      const x_mm = 20.0 + normX * 160.0;
-      const y_mm = 20.0 + normY * 160.0;
-      return { x: Math.max(0, Math.min(200, x_mm)), y: Math.max(0, Math.min(200, y_mm)) };
-    }
-
-    function calculateDistance() {
-      const dx = state.ptB_mm.x - state.ptA_mm.x;
-      const dy = state.ptB_mm.y - state.ptA_mm.y;
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-
-    function calculateNaiveDistance() {
-      const pa = worldToPixel(state.ptA_mm.x, state.ptA_mm.y);
-      const pb = worldToPixel(state.ptB_mm.x, state.ptB_mm.y);
-      const pxDist = Math.hypot(pb.u - pa.u, pb.v - pa.v);
-      return pxDist * 0.245;
-    }
-
-    function updateHUD() {
-      const dist = calculateDistance();
-      const pa_px = worldToPixel(state.ptA_mm.x, state.ptA_mm.y);
-      const pb_px = worldToPixel(state.ptB_mm.x, state.ptB_mm.y);
-
-      document.getElementById('metricDistance').innerText = dist.toFixed(3);
-      const pxDistance = Math.hypot(pb_px.u - pa_px.u, pb_px.v - pa_px.v);
-      const gsd = dist / Math.max(1, pxDistance);
-      const uncertainty = Math.sqrt(2.0 * Math.pow(gsd * 0.05, 2) + 0.00005);
-      
-      document.getElementById('metricUncertainty').innerText = `\u00B1 ${uncertainty.toFixed(3)} mm (${Math.round(uncertainty * 1000)} \u03BCm)`;
-      document.getElementById('ptACoordsMm').innerText = `X: ${state.ptA_mm.x.toFixed(3)} mm, Y: ${state.ptA_mm.y.toFixed(3)} mm`;
-      document.getElementById('ptACoordsPx').innerText = `u: ${pa_px.u.toFixed(2)}, v: ${pa_px.v.toFixed(2)}`;
-      document.getElementById('ptBCoordsMm').innerText = `X: ${state.ptB_mm.x.toFixed(3)} mm, Y: ${state.ptB_mm.y.toFixed(3)} mm`;
-      document.getElementById('ptBCoordsPx').innerText = `u: ${pb_px.u.toFixed(2)}, v: ${pb_px.v.toFixed(2)}`;
-
-      const naive = calculateNaiveDistance();
-      const err = Math.abs(naive - dist);
-      document.getElementById('naiveDistance').innerText = `${naive.toFixed(1)} mm`;
-      document.getElementById('naiveError').innerText = `${err > 0.1 ? '+' : ''}${(naive - dist).toFixed(1)} mm error`;
-    }
-
-    function renderCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      const p00 = worldToPixel(0, 0);
-      const p20 = worldToPixel(200, 0);
-      const p22 = worldToPixel(200, 200);
-      const p02 = worldToPixel(0, 200);
-
-      ctx.beginPath();
-      ctx.moveTo(p00.u, p00.v);
-      ctx.lineTo(p20.u, p20.v);
-      ctx.lineTo(p22.u, p22.v);
-      ctx.lineTo(p02.u, p02.v);
-      ctx.closePath();
-      ctx.fillStyle = '#09090b';
-      ctx.fill();
-      ctx.strokeStyle = '#27272a';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      // Precision Grid
-      ctx.strokeStyle = '#18181b';
-      ctx.lineWidth = 1;
-      for (let x = 20; x < 200; x += 20) {
-        const top = worldToPixel(x, 0);
-        const btm = worldToPixel(x, 200);
-        ctx.beginPath();
-        ctx.moveTo(top.u, top.v);
-        ctx.lineTo(btm.u, btm.v);
-        ctx.stroke();
-      }
-      for (let y = 20; y < 200; y += 20) {
-        const lft = worldToPixel(0, y);
-        const rgt = worldToPixel(200, y);
-        ctx.beginPath();
-        ctx.moveTo(lft.u, lft.v);
-        ctx.lineTo(rgt.u, rgt.v);
-        ctx.stroke();
-      }
-
-      // Fiducials
-      const fids = [
-        worldToPixel(20, 20),
-        worldToPixel(180, 20),
-        worldToPixel(180, 180),
-        worldToPixel(20, 180)
-      ];
-      fids.forEach((f) => {
-        ctx.beginPath();
-        ctx.arc(f.u, f.v, 7, 0, Math.PI * 2);
-        ctx.fillStyle = '#3f3f46';
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(f.u, f.v, 2.5, 0, Math.PI * 2);
-        ctx.fillStyle = '#09090b';
-        ctx.fill();
-      });
-
-      const pa = worldToPixel(state.ptA_mm.x, state.ptA_mm.y);
-      const pb = worldToPixel(state.ptB_mm.x, state.ptB_mm.y);
-
-      // Measurement Ray
-      ctx.beginPath();
-      ctx.moveTo(pa.u, pa.v);
-      ctx.lineTo(pb.u, pb.v);
-      ctx.strokeStyle = '#00f0ff';
-      ctx.lineWidth = 2;
-      ctx.setLineDash([5, 3]);
-      ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Draw Laser Gaussian Spots
-      drawSimSpot(pa.u, pa.v, state.laserColor);
-      drawSimSpot(pb.u, pb.v, state.laserColor);
-
-      // Endpoint Reticles
-      drawReticle(ctx, pa.u, pa.v, '#10b981', 'POINT A');
-      drawReticle(ctx, pb.u, pb.v, '#f59e0b', 'POINT B');
-    }
-
-    function drawSimSpot(cx, cy, color) {
-      const grad = ctx.createRadialGradient(cx, cy, 1, cx, cy, 24);
-      if (color === 'red') {
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.2, '#ff3b30');
-        grad.addColorStop(0.5, 'rgba(239, 68, 68, 0.4)');
-        grad.addColorStop(1, 'rgba(239, 68, 68, 0)');
-      } else if (color === 'green') {
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.2, '#34c759');
-        grad.addColorStop(0.5, 'rgba(52, 199, 89, 0.4)');
-        grad.addColorStop(1, 'rgba(52, 199, 89, 0)');
-      } else {
-        grad.addColorStop(0, '#ffffff');
-        grad.addColorStop(0.2, '#5856d6');
-        grad.addColorStop(0.5, 'rgba(88, 86, 214, 0.4)');
-        grad.addColorStop(1, 'rgba(88, 86, 214, 0)');
-      }
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 24, 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    function renderProfile() {
-      pctx.clearRect(0, 0, profileCanvas.width, profileCanvas.height);
-      const w = profileCanvas.width;
-      const h = profileCanvas.height;
-
-      pctx.fillStyle = '#09090b';
-      pctx.fillRect(0, 0, w, h);
-
-      pctx.strokeStyle = '#18181b';
-      pctx.lineWidth = 1;
-      for (let y = 15; y < h; y += 20) {
-        pctx.beginPath();
-        pctx.moveTo(0, y);
-        pctx.lineTo(w, y);
-        pctx.stroke();
-      }
-
-      pctx.beginPath();
-      const midA = w * 0.28;
-      for (let x = 0; x < w * 0.5; x++) {
-        const dist = Math.abs(x - midA);
-        const intensity = Math.exp(-Math.pow(dist, 2) / (2 * Math.pow(16, 2)));
-        const y = h - 10 - intensity * (h - 25);
-        if (x === 0) pctx.moveTo(x, y);
-        else pctx.lineTo(x, y);
-      }
-      pctx.strokeStyle = '#10b981';
-      pctx.lineWidth = 2.5;
-      pctx.stroke();
-
-      pctx.beginPath();
-      const midB = w * 0.72;
-      for (let x = w * 0.5; x < w; x++) {
-        const dist = Math.abs(x - midB);
-        const intensity = Math.exp(-Math.pow(dist, 2) / (2 * Math.pow(16, 2)));
-        const y = h - 10 - intensity * (h - 25);
-        if (x === Math.floor(w * 0.5)) pctx.moveTo(x, y);
-        else pctx.lineTo(x, y);
-      }
-      pctx.strokeStyle = '#f59e0b';
-      pctx.lineWidth = 2.5;
-      pctx.stroke();
-    }
-
-    // Interactive dragging for Sim canvas
-    canvas.addEventListener('mousedown', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const u = (e.clientX - rect.left) * (canvas.width / rect.width);
-      const v = (e.clientY - rect.top) * (canvas.height / rect.height);
-      const pa = worldToPixel(state.ptA_mm.x, state.ptA_mm.y);
-      const pb = worldToPixel(state.ptB_mm.x, state.ptB_mm.y);
-
-      if (Math.hypot(pa.u - u, pa.v - v) < 25) {
-        state.dragging = 'ptA';
-      } else if (Math.hypot(pb.u - u, pb.v - v) < 25) {
-        state.dragging = 'ptB';
-      } else {
-        const distA = Math.hypot(pa.u - u, pa.v - v);
-        const distB = Math.hypot(pb.u - u, pb.v - v);
-        const pt = pixelToWorldSim(u, v);
-        if (distA <= distB) state.ptA_mm = pt;
-        else state.ptB_mm = pt;
-      }
-      updateHUD();
-      renderCanvas();
-    });
-
-    canvas.addEventListener('mousemove', (e) => {
-      if (!state.dragging) return;
-      const rect = canvas.getBoundingClientRect();
-      const u = (e.clientX - rect.left) * (canvas.width / rect.width);
-      const v = (e.clientY - rect.top) * (canvas.height / rect.height);
-      const pt = pixelToWorldSim(u, v);
-      if (state.dragging === 'ptA') state.ptA_mm = pt;
-      else if (state.dragging === 'ptB') state.ptB_mm = pt;
-      updateHUD();
-      renderCanvas();
-    });
-
-    window.addEventListener('mouseup', () => {
-      state.dragging = null;
-    });
-
-    // Tilt Slider
-    const tiltSlider = document.getElementById('tiltSlider');
-    tiltSlider.addEventListener('input', (e) => {
-      state.tiltDeg = parseFloat(e.target.value);
-      document.getElementById('tiltValLabel').innerText = `${state.tiltDeg.toFixed(1)}\u00B0`;
-      document.getElementById('camAngleBadge').innerText = `${state.tiltDeg.toFixed(1)}\u00B0 Slant`;
-      updateHUD();
-      renderCanvas();
-    });
-
-    // Color Selector
-    function setLaserColor(color) {
-      state.laserColor = color;
-      ['btnRed', 'btnGreen', 'btnBlue'].forEach(id => {
-        document.getElementById(id).className = 'py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-950 border border-zinc-800 text-zinc-400 hover:border-zinc-700';
-      });
-      if (color === 'red') {
-        document.getElementById('btnRed').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-red-950 border border-red-600 text-red-200';
-        document.getElementById('wavelengthBadge').innerText = '650 nm Red';
-      } else if (color === 'green') {
-        document.getElementById('btnGreen').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-emerald-950 border border-emerald-600 text-emerald-200';
-        document.getElementById('wavelengthBadge').innerText = '532 nm Green';
-      } else {
-        document.getElementById('btnBlue').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-950 border border-blue-600 text-blue-200';
-        document.getElementById('wavelengthBadge').innerText = '405 nm Blue';
-      }
-      renderCanvas();
-    }
-
-    // Ambient Noise Toggle
-    document.getElementById('ambientToggle').addEventListener('change', (e) => {
-      state.ambientNoise = e.target.checked;
-      renderCanvas();
-    });
-
-    // Presets
-    function applyPreset(name) {
-      if (name === 'gauge100') {
-        state.ptA_mm = { x: 50.0, y: 100.0 };
-        state.ptB_mm = { x: 150.0, y: 100.0 };
-      } else if (name === 'baseline120') {
-        state.ptA_mm = { x: 40.0, y: 100.0 };
-        state.ptB_mm = { x: 160.0, y: 100.0 };
-      } else if (name === 'diagonal85') {
-        state.ptA_mm = { x: 60.0, y: 70.0 };
-        state.ptB_mm = { x: 120.0, y: 130.83 };
-      }
-      updateHUD();
-      renderCanvas();
-    }
-
-    function resetDefaults() {
-      state.tiltDeg = 15.0;
-      tiltSlider.value = 15;
-      document.getElementById('tiltValLabel').innerText = '15.0\u00B0';
-      document.getElementById('camAngleBadge').innerText = '15.0\u00B0 Slant';
-      setLaserColor('red');
-      applyPreset('baseline120');
-    }
-
-    // Initial Load
+    // Auto-load sample reference on launch
     window.addEventListener('DOMContentLoaded', () => {
       loadSampleTestImage();
-      updateHUD();
-      renderCanvas();
-      renderProfile();
     });
   </script>
 </body>

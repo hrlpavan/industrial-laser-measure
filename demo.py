@@ -124,6 +124,10 @@ def run_web_demo(port: int = 8080):
                         "result": {
                             "point_a_px": [round(result.point_a_px[0], 2), round(result.point_a_px[1], 2)],
                             "point_b_px": [round(result.point_b_px[0], 2), round(result.point_b_px[1], 2)],
+                            "point_a_cm": [result.point_a_cm[0], result.point_a_cm[1]],
+                            "point_b_cm": [result.point_b_cm[0], result.point_b_cm[1]],
+                            "distance_cm": result.distance_cm,
+                            "uncertainty_cm": result.uncertainty_cm,
                             "point_a_mm": [result.point_a_mm[0], result.point_a_mm[1]],
                             "point_b_mm": [result.point_b_mm[0], result.point_b_mm[1]],
                             "distance_mm": result.distance_mm,
@@ -197,11 +201,11 @@ def run_cli_demo():
     print("================================================================")
     print(f"  Point A Image (Sub-pixel px): ({res.point_a_px[0]:.2f}, {res.point_a_px[1]:.2f})")
     print(f"  Point B Image (Sub-pixel px): ({res.point_b_px[0]:.2f}, {res.point_b_px[1]:.2f})")
-    print(f"  Point A Physical (mm):        ({res.point_a_mm[0]:.3f}, {res.point_a_mm[1]:.3f})")
-    print(f"  Point B Physical (mm):        ({res.point_b_mm[0]:.3f}, {res.point_b_mm[1]:.3f})")
+    print(f"  Point A Physical (cm):        ({res.point_a_cm[0]:.3f}, {res.point_a_cm[1]:.3f}) cm")
+    print(f"  Point B Physical (cm):        ({res.point_b_cm[0]:.3f}, {res.point_b_cm[1]:.3f}) cm")
     print("----------------------------------------------------------------")
-    print(f"  TRUE MEASURED DISTANCE:       {res.distance_mm:.3f} mm")
-    print(f"  UNCERTAINTY BUDGET (95% CI):  +/- {res.uncertainty_mm:.3f} mm")
+    print(f"  TRUE MEASURED DISTANCE:       {res.distance_cm:.3f} cm  ({res.distance_mm:.3f} mm)")
+    print(f"  UNCERTAINTY BUDGET (95% CI):  +/- {res.uncertainty_cm:.4f} cm  (+/- {res.uncertainty_mm:.3f} mm)")
     print(f"  SENSOR RESOLUTION (GSD):      {res.gsd_mm_per_px:.4f} mm/pixel")
     print("================================================================")
 
