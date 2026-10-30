@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HRL Industrial Laser Metrology Station</title>
+  <title>HRL Industrial Line & Laser Metrology Station</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     /* ========================================================= */
@@ -36,7 +36,7 @@
       font-family: var(--apple-mono);
     }
 
-    /* Apple Ribbon Banner (Light Mode) */
+    /* Apple Ribbon Banner */
     .apple-ribbon {
       background: rgba(255, 255, 255, 0.90);
       backdrop-filter: blur(20px) saturate(180%);
@@ -66,7 +66,7 @@
       text-decoration: underline;
     }
 
-    /* HRL Tactile Brand Cards (Light Studio) */
+    /* HRL Tactile Brand Cards */
     .brand-tactile-card {
       background: var(--apple-card-bg);
       border: 1px solid var(--apple-border);
@@ -91,7 +91,7 @@
       font-family: var(--apple-font);
     }
 
-    /* HRL Pill Badges (Light Mode) */
+    /* HRL Pill Badges */
     .brand-pill-badge {
       display: inline-flex;
       align-items: center;
@@ -147,7 +147,7 @@
       color: var(--apple-text-primary);
       font-size: 12px;
       font-weight: 600;
-      padding: 7px 15px;
+      padding: 7px 14px;
       border-radius: 9999px;
       display: inline-flex;
       align-items: center;
@@ -184,7 +184,7 @@
   <!-- TOP APPLE-STYLE ANNOUNCEMENT RIBBON -->
   <div class="apple-ribbon">
     <span>
-      <strong>HRL Research & Metrology:</strong> Sub-Pixel Laser Distance Engine (Point A &rarr; Point B)
+      <strong>HRL Research & Metrology:</strong> Universal Optical Distance Engine &bull; Pencil, Pen, or Laser Line (A &rarr; B)
       <a href="https://github.com/hrlpavan/industrial-laser-measure" target="_blank" rel="noreferrer">
         <span>ISO 10360 Calibrated Standard</span>
         <svg class="w-3.5 h-3.5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
@@ -194,7 +194,7 @@
 
   <div class="max-w-6xl w-full mx-auto p-4 md:p-6 lg:p-8 flex-1 space-y-6">
 
-    <!-- MASTER BRAND HEADER (FEATURING OFFICIAL HRL LOGO) -->
+    <!-- MASTER BRAND HEADER (OFFICIAL HRL LOGO) -->
     <header class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-zinc-200 gap-4">
       <div class="flex items-center gap-3.5">
         <!-- HRL Official Logo -->
@@ -207,19 +207,23 @@
             <span class="w-1 h-1 rounded-full bg-zinc-300"></span>
             <span class="text-[11px] font-medium text-zinc-500 font-mono">Advanced Metrology Division</span>
           </div>
-          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-zinc-900 mt-0.5">Laser Line Metrology Station</h1>
+          <h1 class="text-xl md:text-2xl font-bold tracking-tight text-zinc-900 mt-0.5">Line &amp; Laser Metrology Station</h1>
         </div>
       </div>
 
-      <!-- Quick Minimalist Controls -->
-      <div class="flex items-center gap-2">
-        <button onclick="loadSampleTestImage()" class="brand-btn-secondary">
-          <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-          <span>Load Calibrated Sample</span>
+      <!-- Quick Preset Samples & Upload -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button onclick="loadSamplePencilImage()" class="brand-btn-secondary" title="Test a line drawn with pencil on paper">
+          <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+          <span>Pencil Line Sample</span>
+        </button>
+        <button onclick="loadSampleLaserImage()" class="brand-btn-secondary" title="Test dual optical laser spots">
+          <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          <span>Laser Sample</span>
         </button>
         <label class="brand-btn-primary cursor-pointer">
           <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-          <span>Upload Laser Photo</span>
+          <span>Upload Image / Photo</span>
           <input type="file" id="fileInput" accept="image/*,.jpg,.jpeg,.png,.webp,.bmp,.tiff" class="hidden" onchange="handleFileSelect(event)">
         </label>
       </div>
@@ -242,15 +246,15 @@
                 <span class="brand-pill-dot"></span>
                 <span id="engineBadge" class="brand-pill-text">Inspection Ready</span>
               </span>
-              <span id="resolutionBadge" class="text-xs text-zinc-500 font-mono bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200">
-                1280 &times; 960 px
+              <span id="sourceBadge" class="text-xs text-zinc-600 font-mono bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200">
+                Source: <strong id="sourceLabel" class="text-zinc-900">Auto (Pencil / Pen / Laser)</strong>
               </span>
             </div>
 
-            <!-- Auto-Detect Pill Button -->
-            <button onclick="autoDetectSpots()" class="text-xs font-mono font-semibold text-[#d1002d] hover:text-[#b00026] flex items-center gap-1.5 transition">
+            <!-- Auto-Detect Button -->
+            <button onclick="autoDetectFeature()" class="text-xs font-mono font-semibold text-[#d1002d] hover:text-[#b00026] flex items-center gap-1.5 transition">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>Auto-Detect Laser Spots</span>
+              <span>Auto-Detect Endpoints</span>
             </button>
           </div>
 
@@ -261,7 +265,7 @@
             <!-- User Instruction Prompt (Floating Pill) -->
             <div id="instructionPill" class="absolute bottom-3 left-3 bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-zinc-200/80 text-xs font-medium text-zinc-700 shadow-sm flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span id="instructionText">Click Point A and Point B on your laser to measure</span>
+              <span id="instructionText">Click Point A and Point B on your drawn line or laser to measure</span>
             </div>
           </div>
 
@@ -279,11 +283,11 @@
           </div>
         </div>
 
-        <!-- Optional Minimalist Dropzone (For Drag & Drop) -->
-        <div id="dropZone" class="dropzone rounded-2xl p-5 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
+        <!-- Minimalist Dropzone -->
+        <div id="dropZone" class="dropzone rounded-2xl p-4 text-center cursor-pointer" onclick="document.getElementById('fileInput').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
           <div class="flex items-center justify-center gap-3 text-xs text-zinc-600">
             <svg class="w-4 h-4 text-[#d1002d]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-            <span>Drag &amp; drop test photo here (JPG, PNG, TIFF, BMP, WEBP)</span>
+            <span>Drop photo of drawn line (pencil / pen / paper) or laser beam here</span>
           </div>
         </div>
 
@@ -346,14 +350,15 @@
           </div>
         </div>
 
-        <!-- Minimalist Optical Settings (Clean & Uncluttered) -->
+        <!-- Minimalist Source & Calibration Controls -->
         <div class="bg-white rounded-2xl border border-zinc-200 p-4 space-y-3">
-          <div class="text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">Optical Filter</div>
+          <div class="text-xs font-mono font-bold text-zinc-700 uppercase tracking-wider">Line Source Mode</div>
           
-          <div class="grid grid-cols-3 gap-2">
-            <button onclick="setLaserColor('red')" id="btnRed" class="py-1.5 text-xs font-mono font-bold rounded-lg bg-red-50 border border-red-300 text-red-700">Red 650nm</button>
-            <button onclick="setLaserColor('green')" id="btnGreen" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Green 532nm</button>
-            <button onclick="setLaserColor('blue')" id="btnBlue" class="py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Blue 405nm</button>
+          <!-- Source Selector Pills -->
+          <div class="grid grid-cols-3 gap-1.5 text-xs font-mono">
+            <button onclick="setSourceType('auto')" id="srcBtnAuto" class="py-1.5 px-2 rounded-lg bg-red-50 border border-red-300 text-red-700 font-bold">Auto</button>
+            <button onclick="setSourceType('pencil_pen')" id="srcBtnPencil" class="py-1.5 px-2 rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Pencil / Pen</button>
+            <button onclick="setSourceType('laser')" id="srcBtnLaser" class="py-1.5 px-2 rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300">Laser</button>
           </div>
 
           <div class="flex items-center justify-between pt-2 border-t border-zinc-100 text-xs">
@@ -371,16 +376,16 @@
 
     <!-- CLEAN MINIMALIST FOOTER -->
     <footer class="pt-4 border-t border-zinc-200 flex flex-col sm:flex-row items-center justify-between text-xs text-zinc-500 gap-2 font-mono">
-      <span>HRL International Pvt. Ltd. &bull; Industrial Metrology Standard</span>
-      <span>Gaussian CoG Resolution: &plusmn;0.05 px &bull; ISO 10360</span>
+      <span>HRL International Pvt. Ltd. &bull; Universal Optical Metrology</span>
+      <span>Pencil, Pen, or Laser Line &bull; ISO 10360 Calibrated &bull; &plusmn;0.05 px</span>
     </footer>
 
   </div>
 
   <script>
     /* ========================================================= */
-    /* HRL MINIMALIST INDUSTRIAL LASER METROLOGY CONTROLLER       */
-    /* Result strictly in Centimeters (cm)                       */
+    /* HRL UNIVERSAL OPTICAL LINE & LASER CONTROLLER              */
+    /* Measures Pencil, Pen, Marker, or Laser in Centimeters (cm) */
     /* ========================================================= */
 
     const canvas = document.getElementById('inspectionCanvas');
@@ -391,6 +396,7 @@
       imageBase64: null,
       imageWidth: 1280,
       imageHeight: 960,
+      sourceType: 'auto', // 'auto', 'pencil_pen', 'laser'
       ptA_px: null,
       ptB_px: null,
       ptA_cm: { x: 4.000, y: 10.000 },
@@ -402,7 +408,7 @@
       serverOverlayImg: null
     };
 
-    // Calibrated Homography matrix (I2W: pixel to world millimeters)
+    // Planar Homography matrix (pixel to physical millimeters)
     const H_I2W = [
       [0.18185, 0.0000, -13.998],
       [0.0000, 0.26675, -29.882],
@@ -414,6 +420,25 @@
       const x_mm = (H_I2W[0][0] * u + H_I2W[0][1] * v + H_I2W[0][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
       const y_mm = (H_I2W[1][0] * u + H_I2W[1][1] * v + H_I2W[1][2]) / (H_I2W[2][0] * u + H_I2W[2][1] * v + H_I2W[2][2]);
       return { x: x_mm / 10.0, y: y_mm / 10.0 };
+    }
+
+    // Source Type Switcher
+    function setSourceType(type) {
+      state.sourceType = type;
+      ['srcBtnAuto', 'srcBtnPencil', 'srcBtnLaser'].forEach(id => {
+        document.getElementById(id).className = 'py-1.5 px-2 rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300';
+      });
+      if (type === 'auto') {
+        document.getElementById('srcBtnAuto').className = 'py-1.5 px-2 rounded-lg bg-red-50 border border-red-300 text-red-700 font-bold';
+        document.getElementById('sourceLabel').innerText = 'Auto (Pencil / Pen / Laser)';
+      } else if (type === 'pencil_pen') {
+        document.getElementById('srcBtnPencil').className = 'py-1.5 px-2 rounded-lg bg-red-50 border border-red-300 text-red-700 font-bold';
+        document.getElementById('sourceLabel').innerText = 'Pencil / Pen on Sheet';
+      } else {
+        document.getElementById('srcBtnLaser').className = 'py-1.5 px-2 rounded-lg bg-red-50 border border-red-300 text-red-700 font-bold';
+        document.getElementById('sourceLabel').innerText = 'Optical Laser Beam';
+      }
+      recalculateMeasurement();
     }
 
     // Drag and Drop Handling
@@ -450,14 +475,12 @@
           canvas.width = state.imageWidth;
           canvas.height = state.imageHeight;
 
-          document.getElementById('resolutionBadge').innerText = `${state.imageWidth} \u00D7 ${state.imageHeight} px`;
-          document.getElementById('engineBadge').innerText = 'Photo Loaded';
-
+          document.getElementById('engineBadge').innerText = 'Photo Ingested';
           state.ptA_px = null;
           state.ptB_px = null;
           state.serverOverlayImg = null;
 
-          document.getElementById('instructionText').innerText = "Click Point A and Point B on your laser to measure";
+          document.getElementById('instructionText').innerText = "Click Point A and Point B on your drawn line or laser mark";
           executeServerMeasurement();
         };
         img.src = evt.target.result;
@@ -465,7 +488,7 @@
       reader.readAsDataURL(file);
     }
 
-    function loadSampleTestImage() {
+    function loadSamplePencilImage() {
       const img = new Image();
       img.onload = function() {
         state.image = img;
@@ -481,10 +504,38 @@
         octx.drawImage(img, 0, 0);
         state.imageBase64 = off.toDataURL('image/png');
 
-        document.getElementById('resolutionBadge').innerText = `${img.width} \u00D7 ${img.height} px (Sample)`;
-        document.getElementById('engineBadge').innerText = 'Sample Loaded';
+        document.getElementById('engineBadge').innerText = 'Pencil Sample';
+        setSourceType('pencil_pen');
 
-        // Calibrated baseline points for sample
+        // Endpoints of drawn pencil line
+        state.ptA_px = { u: 296.0, v: 487.0 };
+        state.ptB_px = { u: 984.0, v: 487.0 };
+        state.serverOverlayImg = null;
+
+        recalculateMeasurement();
+      };
+      img.src = "sample_drawn_line.png";
+    }
+
+    function loadSampleLaserImage() {
+      const img = new Image();
+      img.onload = function() {
+        state.image = img;
+        state.imageWidth = img.width;
+        state.imageHeight = img.height;
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const off = document.createElement('canvas');
+        off.width = img.width;
+        off.height = img.height;
+        const octx = off.getContext('2d');
+        octx.drawImage(img, 0, 0);
+        state.imageBase64 = off.toDataURL('image/png');
+
+        document.getElementById('engineBadge').innerText = 'Laser Sample';
+        setSourceType('laser');
+
         state.ptA_px = { u: 296.96, v: 486.96 };
         state.ptB_px = { u: 983.04, v: 486.96 };
         state.serverOverlayImg = null;
@@ -494,32 +545,18 @@
       img.src = "sample_laser_test.png";
     }
 
-    function setLaserColor(color) {
-      state.laserColor = color;
-      ['btnRed', 'btnGreen', 'btnBlue'].forEach(id => {
-        document.getElementById(id).className = 'py-1.5 text-xs font-mono font-medium rounded-lg bg-zinc-50 border border-zinc-200 text-zinc-600 hover:border-zinc-300';
-      });
-      if (color === 'red') {
-        document.getElementById('btnRed').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-red-50 border border-red-300 text-red-700';
-      } else if (color === 'green') {
-        document.getElementById('btnGreen').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-emerald-50 border border-emerald-300 text-emerald-700';
-      } else {
-        document.getElementById('btnBlue').className = 'py-1.5 text-xs font-mono font-bold rounded-lg bg-blue-50 border border-blue-300 text-blue-700';
-      }
-      recalculateMeasurement();
-    }
-
     function clearPoints() {
       state.ptA_px = null;
       state.ptB_px = null;
       state.serverOverlayImg = null;
       document.getElementById('labelPtAPx').innerText = 'Pending';
       document.getElementById('labelPtBPx').innerText = 'Pending';
-      document.getElementById('instructionText').innerText = "Click Point A and Point B on your laser to measure";
+      document.getElementById('instructionText').innerText = "Click Point A and Point B on your drawn line or laser";
       renderCanvas();
     }
 
-    // Sub-Pixel Centroid Detection in Local ROI (+/- 0.05 px)
+    // Sub-Pixel Centroid Snapping (+/- 0.05 px)
+    // Works for both dark lines on light sheet (pencil/pen) and bright laser on surface
     function findSubpixelPeak(x, y, radius = 22) {
       if (!state.image) return { u: x, v: y };
       const w = canvas.width;
@@ -533,6 +570,17 @@
       if (rw <= 0 || rh <= 0) return { u: x, v: y };
 
       const imgData = ctx.getImageData(ix0, iy0, rw, rh).data;
+
+      // Estimate local background brightness to auto-detect paper vs dark laser
+      let totalGray = 0;
+      const totalPixels = rw * rh;
+      for (let i = 0; i < imgData.length; i += 4) {
+        totalGray += (imgData[i] + imgData[i + 1] + imgData[i + 2]) / 3;
+      }
+      const meanGray = totalGray / totalPixels;
+
+      const isDrawnSheet = (state.sourceType === 'pencil_pen') || (state.sourceType === 'auto' && meanGray > 115);
+
       let maxVal = -1;
       let max_lx = 0;
       let max_ly = 0;
@@ -544,12 +592,13 @@
           const g = imgData[idx + 1];
           const b = imgData[idx + 2];
           let val = 0;
-          if (state.laserColor === 'red') {
-            val = Math.max(0, r - Math.max(g, b));
-          } else if (state.laserColor === 'green') {
-            val = Math.max(0, g - Math.max(r, b));
+          if (isDrawnSheet) {
+            // Dark pencil or pen ink stroke on lighter sheet: inverted contrast
+            const currentGray = (r + g + b) / 3;
+            val = Math.max(0, 255 - currentGray);
           } else {
-            val = Math.max(0, b - Math.max(r, g));
+            // Bright optical laser on darker surface
+            val = Math.max(0, r - Math.max(g, b));
           }
           if (val > maxVal) {
             maxVal = val;
@@ -559,7 +608,7 @@
         }
       }
 
-      if (maxVal > 20) {
+      if (maxVal > 15) {
         let sumW = 0;
         let sumWX = 0;
         let sumWY = 0;
@@ -574,12 +623,11 @@
               const g = imgData[idx + 1];
               const b = imgData[idx + 2];
               let val = 0;
-              if (state.laserColor === 'red') {
-                val = Math.max(0, r - Math.max(g, b));
-              } else if (state.laserColor === 'green') {
-                val = Math.max(0, g - Math.max(r, b));
+              if (isDrawnSheet) {
+                const currentGray = (r + g + b) / 3;
+                val = Math.max(0, 255 - currentGray);
               } else {
-                val = Math.max(0, b - Math.max(r, g));
+                val = Math.max(0, r - Math.max(g, b));
               }
               const wgt = Math.pow(val, 2);
               sumW += wgt;
@@ -595,7 +643,7 @@
       return { u: x, v: y };
     }
 
-    // Canvas Interactive Click & Drag
+    // Interactive Click & Drag Handling
     canvas.addEventListener('mousedown', (e) => {
       if (!state.image) return;
       const rect = canvas.getBoundingClientRect();
@@ -619,7 +667,7 @@
 
       if (!state.ptA_px) {
         state.ptA_px = pt;
-        document.getElementById('instructionText').innerText = "Point A placed. Now click Point B.";
+        document.getElementById('instructionText').innerText = "Point A placed. Now click Point B on the other end.";
       } else if (!state.ptB_px) {
         state.ptB_px = pt;
         document.getElementById('instructionText').innerText = "Measurement locked. Drag points or click to adjust.";
@@ -665,6 +713,7 @@
         pt_a: state.ptA_px ? [state.ptA_px.u, state.ptA_px.v] : null,
         pt_b: state.ptB_px ? [state.ptB_px.u, state.ptB_px.v] : null,
         color: state.laserColor,
+        source: state.sourceType,
         mode: "spots",
         refine_peaks: document.getElementById('snapToggle').checked
       };
@@ -694,13 +743,13 @@
           }
         }
       } catch (e) {
-        // Fallback to client metrology
+        // Fallback to client-side calculation
       }
 
       recalculateMeasurement();
     }
 
-    function autoDetectSpots() {
+    function autoDetectFeature() {
       executeServerMeasurement();
     }
 
@@ -715,12 +764,12 @@
       state.ptA_cm = pa_cm;
       state.ptB_cm = pb_cm;
 
-      // Distance in centimeters (cm)
+      // Distance strictly in Centimeters (cm)
       const dx_cm = pb_cm.x - pa_cm.x;
       const dy_cm = pb_cm.y - pa_cm.y;
       state.distance_cm = Math.hypot(dx_cm, dy_cm);
 
-      // Uncertainty in centimeters (cm)
+      // Uncertainty budget in Centimeters (cm)
       const pxDist = Math.hypot(state.ptB_px.u - state.ptA_px.u, state.ptB_px.v - state.ptA_px.v);
       const gsd_cm = state.distance_cm / Math.max(1e-6, pxDist);
       state.uncertainty_cm = Math.sqrt(2.0 * Math.pow(gsd_cm * 0.05, 2) + 0.0000005);
@@ -732,7 +781,7 @@
     function updateHUD() {
       if (!state.ptA_px || !state.ptB_px) return;
 
-      // Result strictly in Centimeters (cm)
+      // Value strictly in Centimeters (cm)
       document.getElementById('metricDistCm').innerText = state.distance_cm.toFixed(3);
       
       const uncertMicrons = Math.round(state.uncertainty_cm * 10000);
@@ -759,13 +808,12 @@
       if (state.image) {
         ctx.drawImage(state.image, 0, 0, canvas.width, canvas.height);
       } else {
-        // Clean Light Canvas Placeholder
         ctx.fillStyle = '#fafafc';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#86868b';
         ctx.font = '14px -apple-system, sans-serif';
         ctx.textAlign = 'center';
-        ctx.fillText('Please upload an image or click "Load Calibrated Sample"', canvas.width / 2, canvas.height / 2);
+        ctx.fillText('Please upload an image or click "Pencil Line Sample"', canvas.width / 2, canvas.height / 2);
         return;
       }
 
@@ -856,7 +904,7 @@
 
     function exportInspectionPNG() {
       const link = document.createElement('a');
-      link.download = `laser_inspection_${state.distance_cm.toFixed(3)}cm.png`;
+      link.download = `hrl_line_inspection_${state.distance_cm.toFixed(3)}cm.png`;
       link.href = canvas.toDataURL('image/png');
       link.click();
     }
@@ -864,6 +912,7 @@
     function copyMeasurementJSON() {
       const payload = {
         organization: "HRL International Pvt. Ltd.",
+        source_mode: state.sourceType,
         standard: "ISO 10360",
         measured_distance_cm: state.distance_cm,
         uncertainty_cm: state.uncertainty_cm,
@@ -886,9 +935,9 @@
       });
     }
 
-    // Auto-load sample reference on launch
+    // Default: load pencil line sample on clean sheet
     window.addEventListener('DOMContentLoaded', () => {
-      loadSampleTestImage();
+      loadSamplePencilImage();
     });
   </script>
 </body>

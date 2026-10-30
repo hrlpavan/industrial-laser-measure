@@ -152,20 +152,56 @@ class CameraCalibration:
 
 
 class LaserDetector:
-    """Extracts laser spots and lines with sub-pixel Center-of-Gravity (CoG) precision."""
+    """
+    Extracts marks with sub-pixel Center-of-Gravity (CoG) precision.
+    Supports:
+    - Drawn lines or marks from pencil, pen, or marker on clean paper / sheets
+    - Coherent optical laser lines and laser spots (red, green, blue)
+    """
 
-    def __init__(self, wavelength_color: str = "red", threshold_factor: float = 0.5):
+    def __init__(
+        self,
+        wavelength_color: str = "red",
+        threshold_factor: float = 0.4,
+        source_type: str = "auto",
+    ):
         self.color = wavelength_color.lower()
         self.threshold_factor = threshold_factor
+        self.source_type = source_type.lower()
 
     def extract_laser_mask(self, bgr_image: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
         """
-        Isolates laser photons using spectral channel differencing against ambient lighting.
+        Extracts feature mask and intensity gradient channel.
+        Automatically detects whether the input is a drawn line on a light sheet (pencil/pen)
+        or a high-energy optical beam (laser).
         Returns: (binary_mask, intensity_channel)
         """
+        gray = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
+        mean_brightness = float(np.mean(gray))
+
+        # Check polarity: dark marks on light sheet (e.g. pencil/pen on paper)
+        is_drawn_on_sheet = (
+            self.source_type in ["pencil", "pen", "pencil_pen", "drawn"]
+            or (self.source_type == "auto" and mean_brightness > 115.0)
+        )
+
+        if is_drawn_on_sheet:
+            # Estimate paper background via large blur
+            bg = cv2.GaussianBlur(gray, (51, 51), 0)
+            # Subtracting gray from background yields high values for dark pencil/pen strokes
+            diff = cv2.subtract(bg, gray)
+            max_val = float(np.max(diff))
+            if max_val < 15.0:
+                return np.zeros_like(gray, dtype=np.uint8), diff
+            thresh_val = max(18.0, max_val * self.threshold_factor)
+            _, mask = cv2.threshold(diff, thresh_val, 255, cv2.THRESH_BINARY)
+            kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
+            mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+            return mask, diff
+
+        # Coherent optical laser beam (bright photons on dark/normal surface)
         b, g, r = cv2.split(bgr_image)
         if self.color == "red":
-            # Red laser: highlight where red dominates over green and blue
             ambient = np.maximum(g, b)
             diff = cv2.subtract(r, ambient)
             laser_signal = cv2.addWeighted(r, 0.6, diff, 0.4, 0)
@@ -178,16 +214,14 @@ class LaserDetector:
             diff = cv2.subtract(b, ambient)
             laser_signal = cv2.addWeighted(b, 0.6, diff, 0.4, 0)
         else:
-            laser_signal = cv2.cvtColor(bgr_image, cv2.COLOR_BGR2GRAY)
+            laser_signal = gray
 
         max_val = float(np.max(laser_signal))
         if max_val < 30.0:
-            # Low contrast / no laser visible
             return np.zeros_like(laser_signal, dtype=np.uint8), laser_signal
 
         thresh_val = max(50.0, max_val * self.threshold_factor)
         _, mask = cv2.threshold(laser_signal, thresh_val, 255, cv2.THRESH_BINARY)
-        # Clean minor speckle noise
         kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
         mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
         return mask, laser_signal
@@ -306,14 +340,15 @@ def measure_laser_distance(
     mode: str = "spots",
     laser_color: str = "red",
     subpixel_precision_px: float = 0.05,
+    source: str = "auto",
 ) -> MeasurementResult:
     """
     Main industrial measurement pipeline:
-    1. Extracts sub-pixel laser endpoints A & B.
+    1. Extracts sub-pixel endpoints A & B (laser spots, laser line, or pen/pencil drawn line).
     2. Projects coordinates through calibrated planar homography to world mm.
     3. Calculates metric Euclidean distance and uncertainty bounds.
     """
-    detector = LaserDetector(wavelength_color=laser_color)
+    detector = LaserDetector(wavelength_color=laser_color, source_type=source)
     if mode == "line":
         pt_a_px, pt_b_px = detector.detect_line_endpoints(bgr_image)
     else:
@@ -355,13 +390,14 @@ def measure_points_with_refinement(
     laser_color: str = "red",
     subpixel_precision_px: float = 0.05,
     refine_peaks: bool = True,
+    source: str = "auto",
 ) -> MeasurementResult:
     """
     Measures distance between two points, either auto-detected or provided via
-    user hints (e.g., clicked coordinates on an uploaded test photo).
+    user hints (e.g., clicked coordinates on an uploaded test photo of a drawn line or laser).
     If refine_peaks is True, localizes the sub-pixel Gaussian CoG peak around each hint.
     """
-    detector = LaserDetector(wavelength_color=laser_color)
+    detector = LaserDetector(wavelength_color=laser_color, source_type=source)
     _, intensity = detector.extract_laser_mask(bgr_image)
     h, w = intensity.shape[:2]
 
@@ -372,7 +408,7 @@ def measure_points_with_refinement(
                 x0, x1 = max(0, cx - search_r), min(w, cx + search_r + 1)
                 y0, y1 = max(0, cy - search_r), min(h, cy + search_r + 1)
                 roi = intensity[y0:y1, x0:x1]
-                if roi.size == 0 or np.max(roi) < 20:
+                if roi.size == 0 or np.max(roi) < 15:
                     return pt
                 _, _, _, max_loc = cv2.minMaxLoc(roi)
                 peak_rough = (float(x0 + max_loc[0]), float(y0 + max_loc[1]))
@@ -469,7 +505,8 @@ def main() -> None:
     meas_p.add_argument("--pt-a", help="Optional Point A hint 'x,y' for pinpoint measurement")
     meas_p.add_argument("--pt-b", help="Optional Point B hint 'x,y' for pinpoint measurement")
     meas_p.add_argument("--mode", choices=["spots", "line"], default="spots", help="Measurement target mode")
-    meas_p.add_argument("--color", choices=["red", "green", "blue"], default="red", help="Laser color")
+    meas_p.add_argument("--source", choices=["auto", "pencil_pen", "laser"], default="auto", help="Mark source type: pencil/pen on sheet, optical laser, or auto-detect")
+    meas_p.add_argument("--color", choices=["red", "green", "blue"], default="red", help="Laser color (if optical laser)")
     meas_p.add_argument("--out", "-o", help="Optional path to save annotated overlay image")
     meas_p.add_argument("--json", action="store_true", help="Output results as JSON")
 
@@ -522,10 +559,10 @@ def main() -> None:
             pt_a_hint = tuple(float(v) for v in args.pt_a.split(","))
             pt_b_hint = tuple(float(v) for v in args.pt_b.split(","))
             res = measure_points_with_refinement(
-                img, calib, pt_a_hint=pt_a_hint, pt_b_hint=pt_b_hint, laser_color=args.color
+                img, calib, pt_a_hint=pt_a_hint, pt_b_hint=pt_b_hint, laser_color=args.color, source=args.source
             )
         else:
-            res = measure_laser_distance(img, calib, mode=args.mode, laser_color=args.color)
+            res = measure_laser_distance(img, calib, mode=args.mode, laser_color=args.color, source=args.source)
 
         if args.json:
             print(json.dumps(asdict(res), indent=2))

@@ -95,6 +95,7 @@ def run_web_demo(port: int = 8080):
                     laser_color = payload.get("color", "red")
                     mode = payload.get("mode", "spots")
                     refine = payload.get("refine_peaks", True)
+                    source = payload.get("source", "auto")
 
                     if pt_a and pt_b:
                         pt_a_hint = (float(pt_a[0]), float(pt_a[1]))
@@ -106,6 +107,7 @@ def run_web_demo(port: int = 8080):
                             pt_b_hint=pt_b_hint,
                             laser_color=laser_color,
                             refine_peaks=refine,
+                            source=source,
                         )
                     else:
                         result = measure_laser_distance(
@@ -113,6 +115,7 @@ def run_web_demo(port: int = 8080):
                             calibration=calib,
                             mode=mode,
                             laser_color=laser_color,
+                            source=source,
                         )
 
                     overlay = render_inspection_overlay(img, result)
