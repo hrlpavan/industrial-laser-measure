@@ -10,4 +10,4 @@ build/
 output_*.png
 check_overlay.png
 demo_inspection_result.png
-push_demo_payload.json
+.venv/

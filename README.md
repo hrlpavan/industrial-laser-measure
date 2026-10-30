@@ -121,6 +121,17 @@ python laser_measure.py calibrate-2pt \
 
 ### 2. Measuring Distance
 
+#### Interactive Browser Station (with Drag & Drop Photo Upload):
+```bash
+python demo.py
+```
+Launches the interactive metrology web app on `http://localhost:8080`:
+- **Drag & Drop Test Photo Ingest**: Upload any industrial test file (`.jpg`, `.png`, `.jpeg`, `.webp`, `.bmp`, `.tiff`).
+- **Interactive Pinpoint & Sub-Pixel Peak Snap**: Click Point A and Point B on your workpiece; the engine automatically searches a local Gaussian ROI and snaps to the true photon centroid ($\pm 0.05\text{ px}$).
+- **Automatic Detection**: Auto-detects laser spots or continuous laser line skeleton endpoints.
+- **Perspective Tilt & Scale Calibration**: Switch seamlessly between 4-point homography (`calibration.json`) and direct metric scale factor (`mm/pixel`).
+- **Export Inspection Certificate**: Download annotated inspection PNGs with dimensional HUD overlays and copy ISO 10360 JSON reports.
+
 #### Measuring Two Laser Spots (Point A to Point B):
 ```bash
 python laser_measure.py measure \
@@ -128,6 +139,16 @@ python laser_measure.py measure \
   --calib calibration.json \
   --mode spots \
   --color red \
+  --out output_inspection.png
+```
+
+#### Pinpoint User Measurement with Sub-Pixel Refinement:
+```bash
+python laser_measure.py measure \
+  --image sample_laser_test.png \
+  --calib calibration.json \
+  --pt-a "296.96,486.96" \
+  --pt-b "983.04,486.96" \
   --out output_inspection.png
 ```
 

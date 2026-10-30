@@ -327,6 +327,69 @@ def measure_laser_distance(
     )
 
 
+def measure_points_with_refinement(
+    bgr_image: np.ndarray,
+    calibration: CameraCalibration,
+    pt_a_hint: Optional[Tuple[float, float]] = None,
+    pt_b_hint: Optional[Tuple[float, float]] = None,
+    laser_color: str = "red",
+    subpixel_precision_px: float = 0.05,
+    refine_peaks: bool = True,
+) -> MeasurementResult:
+    """
+    Measures distance between two points, either auto-detected or provided via
+    user hints (e.g., clicked coordinates on an uploaded test photo).
+    If refine_peaks is True, localizes the sub-pixel Gaussian CoG peak around each hint.
+    """
+    detector = LaserDetector(wavelength_color=laser_color)
+    _, intensity = detector.extract_laser_mask(bgr_image)
+    h, w = intensity.shape[:2]
+
+    if pt_a_hint is not None and pt_b_hint is not None:
+        if refine_peaks:
+            def find_peak_near(pt: Tuple[float, float], search_r: int = 15) -> Tuple[float, float]:
+                cx, cy = int(round(pt[0])), int(round(pt[1]))
+                x0, x1 = max(0, cx - search_r), min(w, cx + search_r + 1)
+                y0, y1 = max(0, cy - search_r), min(h, cy + search_r + 1)
+                roi = intensity[y0:y1, x0:x1]
+                if roi.size == 0 or np.max(roi) < 20:
+                    return pt
+                _, _, _, max_loc = cv2.minMaxLoc(roi)
+                peak_rough = (float(x0 + max_loc[0]), float(y0 + max_loc[1]))
+                return detector.compute_subpixel_cog(intensity, peak_rough, radius=5)
+
+            pt_a_px = find_peak_near(pt_a_hint)
+            pt_b_px = find_peak_near(pt_b_hint)
+        else:
+            pt_a_px = pt_a_hint
+            pt_b_px = pt_b_hint
+    else:
+        pt_a_px, pt_b_px = detector.detect_two_spots(bgr_image)
+
+    # Transform to world mm
+    xa_mm, ya_mm = calibration.pixel_to_world(pt_a_px[0], pt_a_px[1])
+    xb_mm, yb_mm = calibration.pixel_to_world(pt_b_px[0], pt_b_px[1])
+
+    distance_mm = math.hypot(xb_mm - xa_mm, yb_mm - ya_mm)
+    px_distance = math.hypot(pt_b_px[0] - pt_a_px[0], pt_b_px[1] - pt_a_px[1])
+    gsd = distance_mm / max(1e-6, px_distance)
+
+    uncertainty_mm = math.sqrt(
+        2.0 * ((gsd * subpixel_precision_px) ** 2)
+        + (calibration.mean_reprojection_error_mm ** 2)
+    )
+
+    return MeasurementResult(
+        point_a_px=pt_a_px,
+        point_b_px=pt_b_px,
+        point_a_mm=(round(xa_mm, 4), round(ya_mm, 4)),
+        point_b_mm=(round(xb_mm, 4), round(yb_mm, 4)),
+        distance_mm=round(distance_mm, 4),
+        uncertainty_mm=round(uncertainty_mm, 4),
+        gsd_mm_per_px=round(gsd, 5),
+    )
+
+
 def render_inspection_overlay(
     bgr_image: np.ndarray, result: MeasurementResult
 ) -> np.ndarray:
@@ -381,7 +444,10 @@ def main() -> None:
     # Subcommand: measure
     meas_p = subparsers.add_parser("measure", help="Measure laser distance from image")
     meas_p.add_argument("--image", "-i", required=True, help="Path to input image")
-    meas_p.add_argument("--calib", "-c", required=True, help="Path to calibration.json")
+    meas_p.add_argument("--calib", "-c", default="calibration.json", help="Path to calibration.json (defaults to calibration.json)")
+    meas_p.add_argument("--scale-mm-per-px", type=float, help="Optional direct scale factor (mm/px) if no calibration matrix is provided")
+    meas_p.add_argument("--pt-a", help="Optional Point A hint 'x,y' for pinpoint measurement")
+    meas_p.add_argument("--pt-b", help="Optional Point B hint 'x,y' for pinpoint measurement")
     meas_p.add_argument("--mode", choices=["spots", "line"], default="spots", help="Measurement target mode")
     meas_p.add_argument("--color", choices=["red", "green", "blue"], default="red", help="Laser color")
     meas_p.add_argument("--out", "-o", help="Optional path to save annotated overlay image")
@@ -420,8 +486,26 @@ def main() -> None:
         img = cv2.imread(args.image)
         if img is None:
             sys.exit(f"Error: Could not read image at {args.image}")
-        calib = CameraCalibration.load(args.calib)
-        res = measure_laser_distance(img, calib, mode=args.mode, laser_color=args.color)
+
+        if args.scale_mm_per_px:
+            s = float(args.scale_mm_per_px)
+            H = np.array([[s, 0.0, 0.0], [0.0, s, 0.0], [0.0, 0.0, 1.0]], dtype=np.float64)
+            calib = CameraCalibration(homography=H)
+        elif Path(args.calib).exists():
+            calib = CameraCalibration.load(args.calib)
+        else:
+            sys.exit(f"Error: Calibration file '{args.calib}' not found and no --scale-mm-per-px provided.")
+
+        pt_a_hint = None
+        pt_b_hint = None
+        if args.pt_a and args.pt_b:
+            pt_a_hint = tuple(float(v) for v in args.pt_a.split(","))
+            pt_b_hint = tuple(float(v) for v in args.pt_b.split(","))
+            res = measure_points_with_refinement(
+                img, calib, pt_a_hint=pt_a_hint, pt_b_hint=pt_b_hint, laser_color=args.color
+            )
+        else:
+            res = measure_laser_distance(img, calib, mode=args.mode, laser_color=args.color)
 
         if args.json:
             print(json.dumps(asdict(res), indent=2))
